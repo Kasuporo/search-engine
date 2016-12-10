@@ -1,5 +1,9 @@
 #Changes
 
+11-12-2016
+
+* Put app in virtualenv 
+
 10-12-2016
 
 * Added shell scripts for 'Linux' and 'OSX'.
