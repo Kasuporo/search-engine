@@ -7,6 +7,7 @@ def index():
 	if request.method == 'POST':
 		query = request.form['search']
 		return render_template('results.html',
-								query = query)
+								query = query,
+								title = "Results")
 	else:
 		return render_template('queryindex.html')
