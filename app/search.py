@@ -1,4 +1,4 @@
-#!\usr\env\python
+#!/usr/bin/env python
 import urllib2
 import lxml.html
 import re

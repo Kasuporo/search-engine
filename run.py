@@ -1,3 +1,3 @@
-#!flask/bin/python
+#!flask/bin/env python
 from app import app
 app.run(debug=True)

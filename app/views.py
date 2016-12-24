@@ -1,5 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 from flask import Flask, render_template, request, redirect, g
+
 from app import app
 
 @app.route('/', methods=['GET', 'POST'])
