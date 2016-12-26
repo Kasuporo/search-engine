@@ -13,7 +13,7 @@ def find_all_links(link):
 	return url
 #print(find_all_links('https://www.raspberrypi.org/forums/viewtopic.php?f=32&t=55260'))
 
-# Web crawler crawls the web with set depth
+# Web crawler finds ALL the links from the web up to a set depth
 def web_crawl(seed, maxDepth):
 	toCrawl = [seed]
 	crawled = []
@@ -34,13 +34,7 @@ def web_crawl(seed, maxDepth):
 def get_text(link):
 	html = urllib2.urlopen(link)
 	soup = BeautifulSoup(html, 'lxml')
-	pTexts = [ p.get_text() for p in soup.find_all('p') ]
+	pTexts = [p.get_text() for p in soup.find_all('p')]
 	pTexts = " ".join(pTexts)
 	return pTexts
 #print(get_text('http://news.bbc.co.uk/2/hi/health/2284783.stm'))
-
-
-""" ()()		Indentation bunny says:
-    ('.')		variables are mixedCase
-    (()()		functions are lower_case_with_underscores
-   *(_()() """
