@@ -11,4 +11,7 @@ def index():
 								query = query,
 								title = "Results")
 	else:
-		return render_template('queryindex.html')
+		return render_template('web_search.html')
+
+@app.route('/text', methods=['GET', 'POST'])
+def text_search():
