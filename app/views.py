@@ -7,6 +7,7 @@ from app import app
 def index():
 	if request.method == 'POST':
 		query = request.form['search']
+		# Put query here
 		return render_template('results.html',
 								query = query,
 								title = "Results")
@@ -15,3 +16,10 @@ def index():
 
 @app.route('/text', methods=['GET', 'POST'])
 def text_search():
+	if request.method == 'POST':
+		query = request.form['search']
+		return render_template('results.html',
+								query = query,
+								title = 'Results')
+	else:
+		return render_template('text_search.html')
