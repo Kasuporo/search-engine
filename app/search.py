@@ -4,7 +4,7 @@ import lxml.html
 import re
 from bs4 import BeautifulSoup
 
-class web(Object):
+class web():
 
 	def __init__(self, query, seed, depth):
 		self.query = query
@@ -46,7 +46,7 @@ class web(Object):
 		return crawled
 	#print(web_crawl('http://www.qantas.com/qcatering/quality-safety-environment/index.html', 2))
 
-class text(Object):
+class text():
 
 	def __init__(self):
 		pass

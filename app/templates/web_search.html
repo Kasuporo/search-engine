@@ -8,15 +8,15 @@
 			<input type="text" name="search" class="search-box">
 			<input type="submit" class="search-button" value="Search">
 		</div>
-		<div class='advanced'>
-	        <div class='advanced-button'>Advanced</div>
-	        <div class='content'>
+		<div class="advanced">
+	        <div class="advanced-button">Advanced</div>
+	        <div class="content">
 	        	<div class= "seedborder"<p>Seed: <input type="text" name="seed" id="seedbox"></p></div>
 	        </div>
 		</div>
 	</div>
 </form>
 
-<script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
-<script src='{{ url_for('static',filename='js/main.js') }}'></script>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="{{ url_for('static',filename='js/main.js') }}"></script>
 {% endblock %}

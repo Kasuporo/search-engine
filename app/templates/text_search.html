@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<link rel='stylesheet' type='text/css' href="{{ url_for('static',filename='css/index.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/index.css') }}">
 
-<h3> TODO - Everything </h3>
+<form action="/text" method="POST">
+	<h3> To-Do - Everything </h3>
+</form>
 
 <!-- <form action="/text" method="POST">
 	<div class ="form-center">
@@ -19,6 +21,6 @@
 	</div>
 </form> -->
 
-<script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
-<script src='{{ url_for('static',filename='js/main.js') }}'></script>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="{{ url_for('static',filename='js/main.js') }}"></script>
 {% endblock %}
