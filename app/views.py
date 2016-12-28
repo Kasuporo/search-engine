@@ -13,7 +13,7 @@ def web_search():
 	if request.method == 'POST':
 		query = request.form['search']
 		# Put query here
-		# webSearch = web(query, seed, depth)
+		# webSearch = web(query, seed, depth, external)
 		# results = webSearch.web_query()
 		return render_template('results.html',
 								results = results,
