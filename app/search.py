@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 import httplib2
 import lxml.html
 import re
@@ -56,7 +56,8 @@ class web():
 
 class text():
 
-	def __init__(self):
-		pass
+	def __init__(self, query, docs):
+		self.query = query
+		self.docs = docs
 
 	# To-Do: Everything
