@@ -1,8 +1,7 @@
-#!/usr/bin/env python2.7
 from flask import Flask, render_template, request, redirect, g
 
+from app import search
 from app import app
-from search import web, text
 
 @app.route('/')
 def home():

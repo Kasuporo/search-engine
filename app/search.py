@@ -1,8 +1,6 @@
-#!/usr/bin/env python2.7
 import httplib2
 import lxml.html
-import re
-from urlparse import urlparse
+from urllib.parse import urlparse
 from lxml import html
 from bs4 import BeautifulSoup
 
