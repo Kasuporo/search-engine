@@ -1,0 +1,4 @@
+httplib2
+bs4
+lxml
+flask
