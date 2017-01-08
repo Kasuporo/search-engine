@@ -13,11 +13,11 @@ class web():
 		self.external = external
 
 	# Gets all links from a page and puts it into a list
-	def find_all_links(self, link, external):
+	def find_all_links(self):
 		http = httplib2.Http()
 		status, response = http.request(link)
 		page = html.fromstring(response)
-		if external:
+		if self.external:
 			url = [link for link in page.xpath('//a/@href') if link.startswith('http')]
 			# Ignores relative links becuause they are bad
 		else:
@@ -28,7 +28,7 @@ class web():
 
 
 	# Gets all text in a <p> tag from a html page
-	def get_text(self, link):
+	def get_text(self):
 		http = httplib2.Http()
 		status, response = http.request(link)
 		soup = BeautifulSoup(response, 'lxml')
@@ -37,12 +37,12 @@ class web():
 		return pTexts
 
 	# Web crawler finds ALL the links from the web up to a set depth
-	def web_crawl(self, seed, maxDepth):
-		toCrawl = [seed]
+	def web_crawl(self):
+		toCrawl = [self.seed]
 		crawled = []
 		nextDepth = []
 		depth = 0
-		while toCrawl and depth <= maxDepth:
+		while toCrawl and depth <= self.depth:
 			page = toCrawl.pop()
 			if page not in crawled:
 				nextDepth += find_all_links(page)
