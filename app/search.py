@@ -41,15 +41,15 @@ class web():
 		toCrawl = [self.seed]
 		crawled = []
 		nextDepth = []
-		depth = 0
-		while toCrawl and depth <= self.depth:
+		atDepth = 0
+		while toCrawl and atDepth <= self.depth:
 			page = toCrawl.pop()
 			if page not in crawled:
 				nextDepth += find_all_links(page)
 				crawled.append(page)
 			if not toCrawl:
 				toCrawl, nextDepth = nextDepth, []
-				depth += 1
+				atDepth += 1
 		return crawled
 
 class text():
