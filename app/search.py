@@ -4,7 +4,7 @@ from urllib.parse import urlparse
 from lxml import html
 from bs4 import BeautifulSoup
 
-class web():
+class web:
 
 	def __init__(self, query, seed, depth, external):
 		self.query = query
@@ -12,7 +12,6 @@ class web():
 		self.depth = depth
 		self.external = external
 
-	# Gets all links from a page and puts it into a list
 	def find_all_links(self):
 		http = httplib2.Http()
 		status, response = http.request(link)
@@ -26,8 +25,6 @@ class web():
 			url = [link for link in page.xpath('//a/@href') if link.startswith(domain)]
 		return url
 
-
-	# Gets all text in a <p> tag from a html page
 	def get_text(self):
 		http = httplib2.Http()
 		status, response = http.request(link)
@@ -36,7 +33,6 @@ class web():
 		pTexts = " ".join(pTexts)
 		return pTexts
 
-	# Web crawler finds ALL the links from the web up to a set depth
 	def web_crawl(self):
 		toCrawl = [self.seed]
 		crawled = []
@@ -52,7 +48,7 @@ class web():
 				atDepth += 1
 		return crawled
 
-class text():
+class text:
 
 	def __init__(self, query, docs):
 		self.query = query
