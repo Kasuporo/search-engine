@@ -16,7 +16,7 @@ class web:
 		http = httplib2.Http()
 		status, response = http.request(link)
 		page = html.fromstring(response)
-		if self.external:
+		if not self.external:
 			url = [link for link in page.xpath('//a/@href') if link.startswith('http')]
 			# Ignores relative links becuause they are bad
 		else:
@@ -53,5 +53,3 @@ class text:
 	def __init__(self, query, docs):
 		self.query = query
 		self.docs = docs
-
-	# To-Do: Everything

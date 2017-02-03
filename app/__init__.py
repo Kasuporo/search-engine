@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!env/bin/python
 from flask import Flask
 
 app = Flask(__name__)

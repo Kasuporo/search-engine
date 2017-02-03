@@ -10,12 +10,11 @@ def home():
 @app.route('/web', methods=['GET', 'POST'])
 def web_search():
 	if request.method == 'POST':
-		"""query = request.form['search']
-		external = request.form['external']
-		seed = request.form['seed']
-		depth = request.form['depth']"""
-		query, external = request.form['query'], request.form['external']
-		seed, depth = request.form['seed'], request.form['depth']
+		if request.form.get('external'):
+			external = True
+		else:
+			external = False
+		query, seed, depth = request.form['query'], request.form['seed'], request.form['depth']
 		# webSearch = web(query, seed, depth, external)
 		# results = webSearch.web_query()
 		return render_template('results.html',
@@ -28,6 +27,7 @@ def web_search():
 def text_search():
 	if request.method == 'POST':
 		query = request.form['search']
+		docs = request.form['docs']
 		# textSearch = text(query, docs)
 		# results = textSearch.text_query()
 		return render_template('results.html',
