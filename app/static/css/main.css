@@ -60,28 +60,12 @@
 		-ms-overflow-style: scrollbar;
 	}
 
-	@media screen and (max-width: 480px) {
-
-		html, body {
-			min-width: 320px;
-		}
-
-	}
 
 	html, body {
 		height: 100%;
 		overflow-x: hidden;
 		width: 100%;
 	}
-
-		@media screen and (max-height: 640px) {
-
-			html, body {
-				height: auto;
-				min-height: 100%;
-			}
-
-		}
 
 	body {
 		display: -moz-flex;
@@ -136,37 +120,6 @@
 
 		}
 
-		@media screen and (max-width: 1280px) {
-
-			body, input, select, textarea {
-				font-size: 11pt;
-			}
-
-		}
-
-		@media screen and (max-width: 980px) {
-
-			body, input, select, textarea {
-				font-size: 12pt;
-			}
-
-		}
-
-		@media screen and (max-width: 736px) {
-
-			body, input, select, textarea {
-				font-size: 12pt;
-			}
-
-		}
-
-		@media screen and (max-width: 480px) {
-
-			body, input, select, textarea {
-				font-size: 12pt;
-			}
-
-		}
 
 	a {
 		-moz-transition: border-bottom-color 0.2s ease, color 0.2s ease;
@@ -452,15 +405,6 @@
 			background-color: #199e83;
 		}
 
-		input[type="submit"].disabled, input[type="submit"]:disabled,
-		button.disabled,
-		button:disabled,
-		.button.disabled,
-		.button:disabled {
-			opacity: 0.5;
-		}
-
-
 /* Header */
 
 	#header h1 {
@@ -499,36 +443,6 @@
 		#search-form > :first-child {
 			margin: 0 0 0 0;
 		}
-
-		@media screen and (max-width: 480px) {
-
-			#search-form {
-				-moz-flex-direction: column;
-				-webkit-flex-direction: column;
-				-ms-flex-direction: column;
-				flex-direction: column;
-			}
-
-				#search-form input[type="text"] {
-					width: 100%;
-				}
-
-				#search-form > * {
-					margin: 1.25em 0 0 0;
-				}
-
-				#search-form .message {
-					bottom: -1.5em;
-					font-size: 0.9em;
-					height: 1em;
-					left: 0;
-					line-height: inherit;
-					margin-top: 0;
-					position: absolute;
-				}
-
-		}
-
 /* Footer */
 
 	#footer {
