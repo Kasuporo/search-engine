@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, redirect, g
-from urllib import urlopen, urlretrieve
 
 import feedparser
 import re
@@ -41,9 +40,3 @@ def text_search():
 								results = results)
 	else:
 		return render_template('text_search.html')
-
-feedURL = "http://apod.nasa.gov.apod"
-def get_image():
-	xml = urlopen(feedURL).read()
-	m = re.search(r"a href\"(image/.*?)\"", xml)
-	firstImg = feedURL + m.group(1)
