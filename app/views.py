@@ -9,7 +9,7 @@ from app import app
 def home():
 	feedURL = "https://www.nasa.gov/rss/dyn/image_of_the_day.rss"
 	feed = feedparser.parse(feedURL)
-	backhround = feed.entries[0]['links'][1]['href']
+	background = feed.entries[0]['links'][1]['href']
 	return render_template('index.html',
 							background = background)
 
