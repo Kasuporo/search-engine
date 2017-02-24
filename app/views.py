@@ -1,11 +1,18 @@
 from flask import Flask, render_template, request, redirect, g
+from urllib import urlopen, urlretrieve
 
+import feedparser
+import re
 from app import search
 from app import app
 
 @app.route('/')
 def home():
-	return render_template('index.html')
+	feedURL = "https://www.nasa.gov/rss/dyn/image_of_the_day.rss"
+	feed = feedparser.parse(feedURL)
+	backhround = feed.entries[0]['links'][1]['href']
+	return render_template('index.html',
+							background = background)
 
 @app.route('/web', methods=['GET', 'POST'])
 def web_search():
@@ -31,7 +38,12 @@ def text_search():
 		# textSearch = text(query, docs)
 		# results = textSearch.text_query()
 		return render_template('results.html',
-								results = results,
-								title = 'Results')
+								results = results)
 	else:
 		return render_template('text_search.html')
+
+feedURL = "http://apod.nasa.gov.apod"
+def get_image():
+	xml = urlopen(feedURL).read()
+	m = re.search(r"a href\"(image/.*?)\"", xml)
+	firstImg = feedURL + m.group(1)
