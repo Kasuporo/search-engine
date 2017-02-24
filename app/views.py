@@ -10,6 +10,7 @@ def home():
 	feedURL = "https://www.nasa.gov/rss/dyn/image_of_the_day.rss"
 	feed = feedparser.parse(feedURL)
 	background = feed.entries[0]['links'][1]['href']
+	# Gets url of NASA image of the day
 	return render_template('index.html',
 							background = background)
 
@@ -20,23 +21,19 @@ def web_search():
 			external = True
 		else:
 			external = False
-		query, seed, depth = request.form['query'], request.form['seed'], request.form['depth']
+			
+		seed, depth = request.form['seed'], request.form['depth']
+		# Gets stuff for web search
+		docs = request.form['docs']
+		# Gets stuff for text search
+		query = request.form['query']
+
+		# textSearch = text(query, docs)
 		# webSearch = web(query, seed, depth, external)
-		# results = webSearch.web_query()
+
+		#TO-DO: Merge text and web search into one big search
 		return render_template('results.html',
 								results = results,
 								title = "Results")
 	else:
 		return render_template('web_search.html')
-
-@app.route('/text', methods=['GET', 'POST'])
-def text_search():
-	if request.method == 'POST':
-		query = request.form['search']
-		docs = request.form['docs']
-		# textSearch = text(query, docs)
-		# results = textSearch.text_query()
-		return render_template('results.html',
-								results = results)
-	else:
-		return render_template('text_search.html')
