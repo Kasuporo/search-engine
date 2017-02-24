@@ -7,8 +7,14 @@
 		<link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}" />
 	</head>
 	<body>
+		<!--- Sets Background Image --->
 		<style type=text/css>
-			body { background-image: url({{ background }}); }
+			body { background-image: url({{ background }});
+			background-size: cover;
+			-webkit-background-size: cover;
+    		-moz-background-size: cover;
+    		-o-background-size: cover;
+			}
 		</style>
 
 		<!-- Header -->
@@ -29,7 +35,7 @@
 					<li><a href="https://www.github.com/kasuporo/search-engine"><span class="label">GitHub</span></a></li>
 				</ul>
 				<ul class="copyright">
-					<li>&copy; 2017</li><li>Credits: Me</li>
+					<li>&copy; 2017</li><li>Background courtesy of NASA's image of the day</li>
 				</ul>
 			</footer>
 
