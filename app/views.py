@@ -14,7 +14,7 @@ def home():
 	return render_template('index.html',
 							background = background)
 
-@app.route('/web', methods=['GET', 'POST'])
+@app.route('/results', methods=['GET', 'POST'])
 def web_search():
 	if request.method == 'POST':
 		if request.form.get('external'):
