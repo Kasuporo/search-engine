@@ -1,5 +1,6 @@
 import httplib2
 import lxml.html
+
 from urllib.parse import urlparse
 from lxml import html
 from bs4 import BeautifulSoup
