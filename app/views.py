@@ -21,7 +21,7 @@ def web_search():
 			external = True
 		else:
 			external = False
-			
+
 		seed, depth = request.form['seed'], request.form['depth']
 		# Gets stuff for web search
 		docs = request.form['docs']
