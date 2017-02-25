@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, g
 
 import feedparser
 import re
+import random
 from app import search
 from app import app
 
@@ -17,7 +18,7 @@ def home():
 @app.route('/results', methods=['GET', 'POST'])
 def web_search():
 	if request.method == 'POST':
-		if request.form.get('external'):
+		""" if request.form.get('external'):
 			external = True
 		else:
 			external = False
@@ -26,14 +27,24 @@ def web_search():
 		# Gets stuff for web search
 		docs = request.form['docs']
 		# Gets stuff for text search
-		query = request.form['query']
+		query = request.form['query'] """
 
 		# textSearch = text(query, docs)
 		# webSearch = web(query, seed, depth, external)
 
 		#TO-DO: Merge text and web search into one big search
+
+		backgrounds = ['http://i.imgur.com/HSEvn6M.jpg', 'http://i.imgur.com/wYekTr5.jpg', 'http://i.imgur.com/AdlyZgO.jpg'
+					   'http://i.imgur.com/I0zYjsT.jpg', 'http://i.imgur.com/I0zYjsT.jpg', 'http://i.imgur.com/mj2QAev.jpg']
+
+		number = random.randint(0,4)
+		background = backgrounds[number]
+
 		return render_template('results.html',
-								results = results,
-								title = "Results")
+								background = background
+								#query = query,
+								#results = results,
+								#title = "Results"
+								)
 	else:
-		return render_template('web_search.html')
+		return redirect("/", code=302)

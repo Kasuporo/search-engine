@@ -1,5 +1,6 @@
 #!/usr/bin/python
-""" This is a test file for testing individual functions"""
+""" This is a test file for testing individual functions
+    before I put them in """
 import feedparser
 
 feedURL = "https://www.nasa.gov/rss/dyn/image_of_the_day.rss"

@@ -1,5 +1,14 @@
 <!DOCTYPE HTML>
 <html>
+	<!--- Background --->
+	<style type=text/css>
+		body { background-image: url({{ background }});
+			   background-position: center;
+			   background-size: cover;
+			   -webkit-background-size: cover;
+			   -moz-background-size: cover;
+			   -o-background-size: cover; }
+	</style>
 	<head>
 		<title>Viperidae Search Engine</title>
 		<meta charset="utf-8" />
@@ -7,16 +16,6 @@
 		<link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}" />
 	</head>
 	<body>
-		<!--- Sets Background Image --->
-		<style type=text/css>
-			body { background-image: url({{ background }});
-				   background-position: center;
-				   background-size: cover;
-				   -webkit-background-size: cover;
-    			   -moz-background-size: cover;
-    			   -o-background-size: cover; }
-		</style>
-
 		<!-- Header -->
 			<header id="header">
 				<h1 style="font-family: source code pro">viperidae</h1>
@@ -24,8 +23,8 @@
 			</header>
 
 		<!-- Form -->
-			<form id="search-form" method="post" action="#">
-				<input type="text" name="query" id="query" placeholder="Enter Query" />
+			<form id="search-form" method="POST" action="/results">
+				<input type="text" name="query" id="query" placeholder="Search" />
 				<input type="submit" value="Search" />
 			</form>
 

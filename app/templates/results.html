@@ -1,19 +1,27 @@
 <!DOCTYPE HTML>
 <html>
+	<!-- Background --->
+	<style type="text/css">
+		body { background-image: url('{{ background }}');
+			background-size: cover;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover; }
+	</style>
 	<head>
 		<title>Results</title>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" href="{{ url_for('static',filename='css/results.css') }}" />
-
 		<!--- Header Search Box --->
 		<header id="header">
-				<form id="search-box" method="post" action="#">
-					<input type="text" name="query" id="query" />
-				</form>
+			<h1 style="font-family: source code pro">viperidae<h1>
+			<form id="search-form" method="post" action="/results">
+				<input type="text" name="query" placeholder="Search" style="color: white;" />
+				<input type="submit" value="Search" />
+			</form>
 		</header>
-
 	</head>
 	<body>
-
+		
 	</body>
 </html>
