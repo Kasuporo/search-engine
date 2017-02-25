@@ -9,7 +9,7 @@
 			-o-background-size: cover; }
 	</style>
 	<head>
-		<title>Results</title>
+		<title>Viperidae Results</title>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" href="{{ url_for('static',filename='css/results.css') }}" />
 		<!--- Header Search Box --->
@@ -22,6 +22,8 @@
 		</header>
 	</head>
 	<body>
-		
+		<div id="search-text">
+			<p style="color: white;">Search results for <b><i>{{ query }}</i></b></p>
+		</div>
 	</body>
 </html>
