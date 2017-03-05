@@ -17,6 +17,8 @@ class web:
 		http = httplib2.Http()
 		status, response = http.request(link)
 		page = html.fromstring(response)
+
+		# Finds every link on a webpage
 		if not self.external:
 			url = [link for link in page.xpath('//a/@href') if link.startswith('http')]
 			# Ignores relative links becuause they are bad
@@ -26,13 +28,16 @@ class web:
 			url = [link for link in page.xpath('//a/@href') if link.startswith(domain)]
 		return url
 
-	def get_text(self):
+	def get_info(self):
 		http = httplib2.Http()
 		status, response = http.request(link)
 		soup = BeautifulSoup(response, 'lxml')
+
+		# Gets title and all text in a <p> tag
+		title = soup.title.name
 		pTexts = [p.get_text() for p in soup.find_all('p')]
-		pTexts = " ".join(pTexts)
-		return pTexts
+		pTexts = "".join(pTexts)
+		return title, pTexts
 
 	def web_crawl(self):
 		toCrawl = [self.seed]
@@ -48,6 +53,12 @@ class web:
 				toCrawl, nextDepth = nextDepth, []
 				atDepth += 1
 		return crawled
+
+		def index(self):
+			# Return as: {URL : [Title, Text]}
+			pages = web_crawl()
+			title, text = [get_info(url) for url in pages]
+			# TO-DO: Index on text
 
 class text:
 

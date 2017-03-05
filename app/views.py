@@ -29,8 +29,8 @@ def web_search():
 		# Gets stuff for text search
 		query = request.form['query']
 
-		# textSearch = text(query, docs)
-		# webSearch = web(query, seed, depth, external)
+		# textSearch = text.index(query, docs)
+		# webSearch = web.index(query, seed, depth, external)
 
 		#TO-DO: Merge text and web search into one big search
 
@@ -39,12 +39,10 @@ def web_search():
 
 		number = random.randint(0,5)
 		background = backgrounds[number]
+		# Sets random backgrounf from list
 
 		return render_template('results.html',
 								background = background,
-								query = query,
-								#results = results,
-								#title = "Results"
-								)
+								query = query)
 	else:
-		return redirect("/", code=302)
+		redirect("/", code=302)
