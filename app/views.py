@@ -13,7 +13,7 @@ def home():
 	background = feed.entries[0]['links'][1]['href']
 	# Gets url of NASA image of the day
 	return render_template('index.html',
-							background = background)
+				background = background)
 
 @app.route('/results', methods=['GET', 'POST'])
 def web_search():
