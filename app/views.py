@@ -35,14 +35,14 @@ def web_search():
 		#TO-DO: Merge text and web search into one big search
 
 		backgrounds = ['http://i.imgur.com/HSEvn6M.jpg', 'http://i.imgur.com/wYekTr5.jpg', 'http://i.imgur.com/AdlyZgO.jpg',
-					   'http://i.imgur.com/I0zYjsT.jpg', 'http://i.imgur.com/I0zYjsT.jpg', 'http://i.imgur.com/mj2QAev.jpg']
+			       'http://i.imgur.com/I0zYjsT.jpg', 'http://i.imgur.com/I0zYjsT.jpg', 'http://i.imgur.com/mj2QAev.jpg']
 
 		number = random.randint(0,5)
 		background = backgrounds[number]
 		# Sets random backgrounf from list
 
 		return render_template('results.html',
-								background = background,
-								query = query)
+					background = background,
+					query = query)
 	else:
 		redirect("/", code=302)
