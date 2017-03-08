@@ -1,0 +1,11 @@
+#
+###### requirements.txt ######
+#
+###### Requirements without Version Specifiers ######
+
+httplib2
+beautifulsoup4
+lxml
+flask
+feedparser
+#

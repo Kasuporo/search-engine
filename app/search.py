@@ -28,7 +28,7 @@ class web:
 			url = [link for link in page.xpath('//a/@href') if link.startswith(domain)]
 		return url
 
-	def get_info(self):
+	def get_info(self, link):
 		http = httplib2.Http()
 		status, response = http.request(link)
 		soup = BeautifulSoup(response, 'lxml')
