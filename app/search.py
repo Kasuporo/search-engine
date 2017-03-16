@@ -1,10 +1,10 @@
 import httplib2
 import lxml.html
-import threading
 
 from urllib.parse import urlparse
 from lxml import html
 from bs4 import BeautifulSoup
+from multiprocessing import Pool
 
 class web:
 
@@ -13,7 +13,6 @@ class web:
         self.seed = str(seed)
         self.depth = depth
         self.external = external
-        threading.Thread.__init__(self)
 
     def find_all_links(self, page, crawled):
         http = httplib2.Http()
@@ -36,7 +35,7 @@ class web:
         status, response = http.request(link)
         soup = BeautifulSoup(response, 'lxml')
 
-        # Gets title and all text in a <p> tag
+	# Gets title and all text in a <p> tag
         title = soup.title.name
         pTexts = [p.get_text() for p in soup.find_all('p')]
         pTexts = "".join(pTexts)
@@ -63,7 +62,7 @@ class web:
                 atDepth += 1
         return crawled
 
-    def index(self):
+    def run(self):
         urls = web_crawl(self.seed)
         with Pool(10) as p:
             index = p.map(page_rank, urls)
