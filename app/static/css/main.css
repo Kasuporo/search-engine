@@ -2,7 +2,7 @@
 
 /* Reset */
 
-	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	html, body, span, h1, p, a, ul, li, form, footer, header {
 		margin: 0;
 		padding: 0;
 		border: 0;
@@ -11,7 +11,7 @@
 		vertical-align: baseline;
 	}
 
-	article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	footer, header {
 		display: block;
 	}
 
@@ -19,22 +19,8 @@
 		line-height: 1;
 	}
 
-	ol, ul {
+	ul {
 		list-style: none;
-	}
-
-	blockquote, q {
-		quotes: none;
-	}
-
-	blockquote:before, blockquote:after, q:before, q:after {
-		content: '';
-		content: none;
-	}
-
-	table {
-		border-collapse: collapse;
-		border-spacing: 0;
 	}
 
 	body {
@@ -88,21 +74,10 @@
 			z-index: 2;
 		}
 
-		body.is-loading *, body.is-loading *:before, body.is-loading *:after {
-			-moz-animation: none !important;
-			-webkit-animation: none !important;
-			-ms-animation: none !important;
-			animation: none !important;
-			-moz-transition: none !important;
-			-webkit-transition: none !important;
-			-ms-transition: none !important;
-			transition: none !important;
-		}
-
 
 /* Type */
 
-	body, input, select, textarea {
+	body, input {
 		color: rgba(255, 255, 255, 0.75);
 		font-family: "Roboto", sans-serif;
 		font-size: 16pt;
@@ -113,7 +88,7 @@
 
 		@media screen and (max-width: 1680px) {
 
-			body, input, select, textarea {
+			body, input {
 				font-size: 12pt;
 			}
 
@@ -135,20 +110,11 @@
 			text-decoration: none;
 		}
 
-	strong, b {
-		color: #fff;
-		font-weight: 700;
-	}
-
-	em, i {
-		font-style: italic;
-	}
-
 	p {
 		margin: 0 0 2em 0;
 	}
 
-	h1, h2, h3, h4, h5, h6 {
+	h1 {
 		color: #fff;
 		text-shadow: 2px 2px 4px #000000;
 		font-weight: 700;
@@ -163,10 +129,6 @@
 
 /* Section/Article */
 
-	section.special, article.special {
-		text-align: center;
-	}
-
 	header p {
 		color: white;
 		position: relative;
@@ -175,9 +137,7 @@
 
 /* Form */
 
-	input[type="text"],
-	select,
-	textarea {
+	input[type="text"] {
 		-moz-appearance: none;
 		-webkit-appearance: none;
 		-ms-appearance: none;
@@ -203,9 +163,7 @@
 		width: 100%;
 	}
 
-		input[type="text"]:focus,
-		select:focus,
-		textarea:focus {
+		input[type="text"]:focus {
 			-moz-animation: focus 0.1s;
 			-webkit-animation: focus 0.1s;
 			-ms-animation: focus 0.1s;
@@ -214,52 +172,13 @@
 			border-color: #1cb495;
 		}
 
-	.select-wrapper {
-		text-decoration: none;
-		display: block;
-		position: relative;
-	}
-
-		.select-wrapper:before {
-			-moz-osx-font-smoothing: grayscale;
-			-webkit-font-smoothing: antialiased;
-			font-style: normal;
-			font-weight: normal;
-			text-transform: none !important;
-		}
-
-		.select-wrapper:before {
-			color: rgba(255, 255, 255, 0.35);
-			content: '\f078';
-			display: block;
-			height: 2.75em;
-			line-height: 2.75em;
-			pointer-events: none;
-			position: absolute;
-			right: 0;
-			text-align: center;
-			top: 0;
-			width: 2.75em;
-		}
-
-		.select-wrapper select::-ms-expand {
-			display: none;
-		}
-
-	input[type="text"],
-	select {
+	input[type="text"] {
 		height: 2.75em;
-	}
-
-	textarea {
-		padding: 0.75em 1em;
 	}
 
 /* Button */
 
-	input[type="submit"],
-	button,
-	.button {
+	input[type="submit"] {
 		-moz-appearance: none;
 		-webkit-appearance: none;
 		-ms-appearance: none;
@@ -284,15 +203,11 @@
 		white-space: nowrap;
 	}
 
-		input[type="submit"]:hover,
-		button:hover,
-		.button:hover {
+		input[type="submit"]:hover {
 			background-color: #1fcaa7;
 		}
 
-		input[type="submit"]:active,
-		button:active,
-		.button:active {
+		input[type="submit"]:active {
 			background-color: #199e83;
 		}
 
@@ -306,10 +221,6 @@
 	#header p {
 		font-size: 1.35em;
 		line-height: 1.65em;
-	}
-
-	#header a {
-		color: inherit;
 	}
 
 
@@ -372,14 +283,10 @@
 					padding-left: 0;
 				}
 
-			#footer .copyright a {
-				color: inherit;
-			}
-
 		#footer:hover {
 			opacity: 1;
 		}
 
 		#footer > :last-child {
 			margin-bottom: 0;
-		}
+}
