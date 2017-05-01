@@ -9,18 +9,18 @@ from multiprocessing import Pool
 class web:
 
     def __init__(self, query, seed, depth, external):
-        self.query = str(query)
-        self.seed = str(seed)
+        self.query = query
+        self.seed = seed
         self.depth = depth
         self.external = external
 
-    def find_all_links(self, page, crawled):
+    def find_all_links(self, link, crawled):
         http = httplib2.Http()
         status, response = http.request(link)
         page = html.fromstring(response)
 
 	# Finds every link on a webpage
-        if page not in crawled:
+        if page not in crawled: # Ignores duplicates
             if not self.external:
                 url = [link for link in page.xpath('//a/@href') if link.startswith('http')]
                 # Ignores relative links becuause they are bad
@@ -28,6 +28,8 @@ class web:
                 parsedUri = urlparse(link)
                 domain = '{uri.scheme}://{uri.netloc}/'.format(uri=parsedUri)
                 url = [link for link in page.xpath('//a/@href') if link.startswith(domain)]
+        else:
+            return
         return url
 
     def get_info(self, link):
@@ -39,33 +41,38 @@ class web:
         title = soup.title.name
         pTexts = [p.get_text() for p in soup.find_all('p')]
         pTexts = "".join(pTexts)
-        return title, pTexts
+        pageInfo = [title, pTexts]
+        return pageInfo
 
     def page_rank(self, urls):
         # Return as: {URL : [Title, Text]}
-        title, text = [get_info(url) for url in urls]
+        with Pool(5) as p:
+            titles, texts = [p.map(self.get_info, urls)]
         # TO-DO: Index on text
 
-    def web_crawl(self, seed):
-        toCrawl = [seed]
+    def web_crawl(self):
+        toCrawl = [self.seed]
         crawled = []
         nextDepth = []
         atDepth = 0
+        pageInfo = {}
         while toCrawl and atDepth <= self.depth:
             page = toCrawl.pop()
             if page not in crawled:
-                nextDepth += find_all_links(page)
+                nextDepth += self.find_all_links(page, crawled)
                 crawled.append(page)
-                # index here
+                pageInfo[page] = self.get_info(page)
             if not toCrawl:
                 toCrawl, nextDepth = nextDepth, []
                 atDepth += 1
+        print(crawled)
+        print(pageInfo)
         return crawled
 
-    def run(self):
-        urls = web_crawl(self.seed)
+    def index(self):
+        urls = self.web_crawl(self.seed)
         with Pool(10) as p:
-            index = p.map(page_rank, urls)
+            index = p.map(self.page_rank, urls)
         return index
 
 class text:
