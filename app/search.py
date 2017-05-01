@@ -44,12 +44,6 @@ class web:
         pageInfo = [title, pTexts]
         return pageInfo
 
-    def page_rank(self, urls):
-        # Return as: {URL : [Title, Text]}
-        with Pool(5) as p:
-            titles, texts = [p.map(self.get_info, urls)]
-        # TO-DO: Index on text
-
     def web_crawl(self):
         toCrawl = [self.seed]
         crawled = []
@@ -65,12 +59,10 @@ class web:
             if not toCrawl:
                 toCrawl, nextDepth = nextDepth, []
                 atDepth += 1
-        print(crawled)
-        print(pageInfo)
-        return crawled
+        return pageInfo
 
     def index(self):
-        urls = self.web_crawl(self.seed)
+        pages = self.web_crawl()
         with Pool(10) as p:
             index = p.map(self.page_rank, urls)
         return index
