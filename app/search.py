@@ -1,5 +1,6 @@
 import httplib2
 import lxml.html
+import operator
 
 from urllib.parse import urlparse
 from lxml import html
@@ -44,13 +45,29 @@ class web:
         return pageInfo
 
     # Get ready for the worst page ranker you have ever seen
-    def page_rank(self, pages):
-        words = self.query.split()
-        with open('stopwords.txt') as stopwords: # Remove unnessecary words from search
+    def page_rank(self, pageInfo, urls):
+        words = self.query.lower().split()
+        with open('app/stopwords.txt') as stopwords: # Remove unnessecary words from search
             for word in words:
                 if word in stopwords:
                     words.remove(word)
-    
+
+        pageRanks = {}
+        for url in urls:
+            rank = 0
+            text = pageInfo[url][1].lower().split()
+            for w in words:
+                for t in text:
+                    if w == t:
+                        rank += 1
+            rank /= len(text) * 100 # Finds the "percentage" of relevance...
+            pageRanks[url] = rank
+        
+        # Sorts based on the values of pageRanks
+        sortedRanks = sorted(pageRanks.items(), key=operator.itemgetter(1), reverse=True)
+        print(sortedRanks)
+        return sortedRanks # Returns as: [(url, rank), ...] in descending order
+
     # Get ready for the slowest web crawler you have ever seen
     def web_crawl(self):
         toCrawl = [self.seed]
@@ -68,8 +85,9 @@ class web:
 
         pageInfo = {}
         for page in crawled:
-            pageInfo[page] = get_info(page)
-        return pageInfo # Returns as {url: [title, ptext], ...}
+            pageInfo[page] = self.get_info(page)
+        self.page_rank(pageInfo, crawled)
+        #return pageInfo # Returns as {url: [title, ptext], ...}
 
 class text:
 
