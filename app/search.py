@@ -56,6 +56,10 @@ class web:
         for url in urls:
             rank = 0
             text = pageInfo[url][1].lower().split()
+            with open('app/stopwords.txt') as stopwords:
+                for word in text:
+                    if word in stopwords:
+                        text.remove(word)
             for w in words:
                 for t in text:
                     if w == t:
