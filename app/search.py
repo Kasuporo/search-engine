@@ -4,7 +4,6 @@ import lxml.html
 from urllib.parse import urlparse
 from lxml import html
 from bs4 import BeautifulSoup
-from multiprocessing import Pool
 
 class web:
 
@@ -44,28 +43,33 @@ class web:
         pageInfo = [title, pTexts]
         return pageInfo
 
+    # Get ready for the worst page ranker you have ever seen
+    def page_rank(self, pages):
+        words = self.query.split()
+        with open('stopwords.txt') as stopwords: # Remove unnessecary words from search
+            for word in words:
+                if word in stopwords:
+                    words.remove(word)
+    
+    # Get ready for the slowest web crawler you have ever seen
     def web_crawl(self):
         toCrawl = [self.seed]
         crawled = []
         nextDepth = []
         atDepth = 0
-        pageInfo = {}
         while toCrawl and atDepth <= self.depth:
             page = toCrawl.pop()
             if page not in crawled:
                 nextDepth += self.find_all_links(page, crawled)
                 crawled.append(page)
-                pageInfo[page] = self.get_info(page)
             if not toCrawl:
                 toCrawl, nextDepth = nextDepth, []
                 atDepth += 1
-        return pageInfo
 
-    def index(self):
-        pages = self.web_crawl()
-        with Pool(10) as p:
-            index = p.map(self.page_rank, urls)
-        return index
+        pageInfo = {}
+        for page in crawled:
+            pageInfo[page] = get_info(page)
+        return pageInfo # Returns as {url: [title, ptext], ...}
 
 class text:
 

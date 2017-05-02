@@ -25,7 +25,7 @@ def page_results():
         external = True
 
     # seed, depth = request.form['seed'], request.form['depth']
-    # docs = request.form['docs']
+    # docs = request.files['docs']
     query = request.form['query']
 
     # text = search.text(query, docs)
