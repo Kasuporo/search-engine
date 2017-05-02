@@ -30,7 +30,7 @@ def page_results():
 
     # text = search.text(query, docs)
     web = search.web(query, seed, depth, external)
-    web.web_crawl()
+    pageInfo, pageRanks = web.search()
     # text = text.index()
     # web = web.index()
 

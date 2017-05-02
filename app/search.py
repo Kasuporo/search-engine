@@ -65,7 +65,6 @@ class web:
         
         # Sorts based on the values of pageRanks
         sortedRanks = sorted(pageRanks.items(), key=operator.itemgetter(1), reverse=True)
-        print(sortedRanks)
         return sortedRanks # Returns as: [(url, rank), ...] in descending order
 
     # Get ready for the slowest web crawler you have ever seen
@@ -86,8 +85,12 @@ class web:
         pageInfo = {}
         for page in crawled:
             pageInfo[page] = self.get_info(page)
-        self.page_rank(pageInfo, crawled)
-        #return pageInfo # Returns as {url: [title, ptext], ...}
+        return pageInfo, crawled # Returns as {url: [title, ptext], ...}
+
+        def search(): # Runs all functions
+            pageInfo, crawled = web_crawl()
+            sortedRanks = page_rank(pageInfo, crawled)
+            return pageInfo, sortedRanks
 
 class text:
 
