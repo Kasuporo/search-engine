@@ -28,8 +28,6 @@ class web:
                 parsedUri = urlparse(link)
                 domain = '{uri.scheme}://{uri.netloc}/'.format(uri=parsedUri)
                 url = [link for link in page.xpath('//a/@href') if link.startswith(domain)]
-        else:
-            return
         return url
 
     def get_info(self, link):
@@ -38,11 +36,14 @@ class web:
         soup = BeautifulSoup(response, 'lxml')
 
 	# Gets title and all text in a <p> tag
-        title = soup.find('title')
-        pTexts = [p.get_text() for p in soup.find_all('p')]
-        pTexts = " ".join(pTexts).replace('\n', '') # Removes all newlines (\n)
-        pageInfo = [title, pTexts]
-        return pageInfo
+        try:
+            title = soup.find('title').get_text()
+            pTexts = [p.get_text() for p in soup.find_all('p')]
+            pTexts = " ".join(pTexts).replace('\n', '') # Removes all newlines (\n)
+            pageInfo = [title, pTexts]
+            return pageInfo
+        except:
+            return None # Makes sure it is a page and not a picture
 
     # Get ready for the worst page ranker you have ever seen
     def page_rank(self, pageInfo, urls):
@@ -96,7 +97,7 @@ class web:
         pageInfo, crawled = self.web_crawl()
         #print(pageInfo)
         sortedRanks = self.page_rank(pageInfo, crawled)
-        print(sortedRanks)
+        #print(sortedRanks)
         return pageInfo, sortedRanks
 
 class text:
