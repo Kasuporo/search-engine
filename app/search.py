@@ -21,7 +21,7 @@ class web:
 
 	# Finds every link on a webpage
         if page not in crawled: # Ignores duplicates
-            if not self.external:
+            if self.external:
                 url = [link for link in page.xpath('//a/@href') if link.startswith('http')]
                 # Ignores relative links becuause they are bad
             else:
@@ -38,9 +38,9 @@ class web:
         soup = BeautifulSoup(response, 'lxml')
 
 	# Gets title and all text in a <p> tag
-        title = soup.title.name
+        title = soup.find('title')
         pTexts = [p.get_text() for p in soup.find_all('p')]
-        pTexts = "".join(pTexts)
+        pTexts = " ".join(pTexts).replace('\n', '') # Removes all newlines (\n)
         pageInfo = [title, pTexts]
         return pageInfo
 
@@ -64,9 +64,10 @@ class web:
                 for t in text:
                     if w == t:
                         rank += 1
-            rank /= len(text) * 100 # Finds the "percentage" of relevance...
+            rankNum = len(words) / len(text)
+            rank /= rankNum * 100
             pageRanks[url] = rank
-        
+
         # Sorts based on the values of pageRanks
         sortedRanks = sorted(pageRanks.items(), key=operator.itemgetter(1), reverse=True)
         return sortedRanks # Returns as: [(url, rank), ...] in descending order
@@ -89,15 +90,40 @@ class web:
         pageInfo = {}
         for page in crawled:
             pageInfo[page] = self.get_info(page)
-        return pageInfo, crawled # Returns as {url: [title, ptext], ...}
+        return pageInfo, crawled # Returns as {url: [title, pTexts], ...}, [crawled, ...]
 
-        def search(): # Runs all functions
-            pageInfo, crawled = web_crawl()
-            sortedRanks = page_rank(pageInfo, crawled)
-            return pageInfo, sortedRanks
+    def search(self): # Runs all functions
+        pageInfo, crawled = self.web_crawl()
+        #print(pageInfo)
+        sortedRanks = self.page_rank(pageInfo, crawled)
+        print(sortedRanks)
+        return pageInfo, sortedRanks
 
 class text:
 
     def __init__(self, query, docs):
         self.query = query
         self.docs = docs
+
+    def page_rank(self):
+        words = self.query.lower().split()
+        with open('app/stopwords.txt') as stopwords:
+            for w in words:
+                if w in stopwords:
+                    words.remove(w)
+
+    def search(self):
+        pass
+
+
+
+#####----- Tests -----#####
+if __name__ == " __main__":
+    seed = "https://github.com/apt-helion/Viperidae"
+    query = "Github"
+    depth = 1
+    external = False
+
+    webSearch = web(query, seed, depth, external)
+    #print(webSearch.web_crawl())
+    #print(webSearch.search())

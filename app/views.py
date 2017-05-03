@@ -12,17 +12,18 @@ def home():
     background = feed.entries[7]['links'][1]['href']
     # Gets url of NASA image of the day
     return render_template('index.html',
-                           background = background)
+                            background = background)
 
 @app.route('/results', methods=['GET', 'POST'])
 def page_results():
     # Default Variables
-    seed = "https://github.com/apt-helion/Viperidae " 
+    seed = "https://github.com/apt-helion"
     depth = 1
-    external = False
+    external = True
+    docFlag = False
 
     if request.form.get('external'):
-        external = True
+        external = False
 
     # seed, depth = request.form['seed'], request.form['depth']
     # docs = request.files['docs']
@@ -44,5 +45,8 @@ def page_results():
 
     return render_template('results.html',
                             background = background,
-                            query = query)
+                            query = query,
+                            docFlag = docFlag,
+                            pageInfo = pageInfo,
+                            pageRanks = pageRanks)
  
