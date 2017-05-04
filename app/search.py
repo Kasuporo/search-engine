@@ -48,7 +48,7 @@ class web:
     # Get ready for the worst page ranker you have ever seen
     def page_rank(self, pageInfo, urls):
         words = self.query.lower().split()
-        with open('app/stopwords.txt') as stopwords: # Remove unnessecary words from search
+        with open('app/stopwords.txt') as stopwords: # Remove unnecessary words from search
             for word in words:
                 if word in stopwords:
                     words.remove(word)
@@ -57,13 +57,13 @@ class web:
         for url in urls:
             rank = 0
             text = pageInfo[url][1].lower().split()
-            with open('app/stopwords.txt') as stopwords:
+            with open('app/stopwords.txt', 'r') as stopwords:
                 for word in text:
                     if word in stopwords:
                         text.remove(word)
             for w in words:
                 for t in text:
-                    if w == t:
+                    if w is t:
                         rank += 1
             rankNum = len(words) / len(text)
             rank /= rankNum * 100
@@ -96,9 +96,9 @@ class web:
     def search(self): # Runs all functions
         pageInfo, crawled = self.web_crawl()
         #print(pageInfo)
-        sortedRanks = self.page_rank(pageInfo, crawled)
+        ranks = self.page_rank(pageInfo, crawled)
         #print(sortedRanks)
-        return pageInfo, sortedRanks
+        return pageInfo, ranks
 
 class text:
 
@@ -106,15 +106,33 @@ class text:
         self.query = query
         self.docs = docs
 
+    # It's the same as the other one
     def page_rank(self):
         words = self.query.lower().split()
-        with open('app/stopwords.txt') as stopwords:
+        with open('app/stopwords.txt', 'r') as stopwords:
             for w in words:
                 if w in stopwords:
                     words.remove(w)
 
+        docRanks = {}
+        rank = 0
+        for doc in self.docs:
+            with open(doc, 'r') as d:
+                text = d.readlines().split()
+                for w in words:
+                    for t in text:
+                        if w == t:
+                            rank += 1
+            rankNum = len(words) / len(text)
+            rank /= rankNum * 100
+            docRanks[doc] = rank
+
+        sortedRanks = sorted(docRanks.items(), key=operator.itemgetter(1), reverse=True)
+        return sortedRanks
+
     def search(self):
-        pass
+        ranks = self.page_rank()
+        return ranks
 
 
 

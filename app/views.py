@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect
+from os.path import basename
 
 import feedparser
 import random
@@ -21,19 +22,18 @@ def page_results():
     depth = 1
     external = True
     docFlag = False
+    docRanks = None
 
     if request.form.get('external'):
         external = False
 
     # seed, depth = request.form['seed'], request.form['depth']
-    # docs = request.files['docs']
     query = request.form['query']
 
-    # text = search.text(query, docs)
+    text = search.text(query, docs)
     web = search.web(query, seed, depth, external)
     pageInfo, pageRanks = web.search()
-    # text = text.index()
-    # web = web.index()
+    #docRanks = text.search()
 
     backgrounds = ['http://i.imgur.com/HSEvn6M.jpg', 'http://i.imgur.com/wYekTr5.jpg',
                    'http://i.imgur.com/AdlyZgO.jpg', 'http://i.imgur.com/I0zYjsT.jpg',
@@ -46,6 +46,7 @@ def page_results():
     return render_template('results.html',
                             background = background,
                             query = query,
+                            docRanks = docRanks,
                             docFlag = docFlag,
                             pageInfo = pageInfo,
                             pageRanks = pageRanks)
