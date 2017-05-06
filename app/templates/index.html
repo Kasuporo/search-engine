@@ -17,28 +17,51 @@
 	</head>
 	<body>
 		<!-- Header -->
-			<header id="header">
-				<h1 style="font-family: source code pro">viperidae</h1>
-				<p>A small scale text and web search engine. Built in Python. Named after a snake.</p>
-			</header>
+		<header id="header">
+			<h1 style="font-family: source code pro">viperidae</h1>
+			<p>A small scale text and web search engine. Built in Python. Named after a snake.</p>
+		</header>
 
 		<!-- Form -->
-			<form id="search-form" method="POST" action="/results">
-				<input type="text" name="query" id="query" placeholder="Search" />
-				<input type="submit" value="Search" />
-			</form>
+		<form id="search-form" method="POST" action="/results">
+			<input type="text" name="query" id="query" placeholder="Search" />
+			<input type="submit" value="Search" />
+		</form>
+
+		<button id="settings">Settings</button>
+		<div id="settingsBox" class="modal">
+			
+			<div class="modal-content">
+				<div class="modal-header">
+					<span class="close">&times;</span>
+					<h2>Settings</h2>
+				</div>
+				
+				<div class="modal-body">
+					<div class =tab">
+						<button class="tablinks" onclick="openTab(event, 'Web')">Web Search</button>
+						<button class="tablinks" onclick="openTab(event, 'File')">File Search</button>
+					<div>
+					<div id="Web" class="tabcontent">
+					</div>
+					<div id="File" class="tabcontent">
+					</div>
+				</div>
+
+			</div>
+		</div>
 
 		<!-- Footer -->
-			<footer id="footer">
-				<ul class="icons">
-					<li><a href="https://www.github.com/apt-helion/search-engine"><span class="label">GitHub</span></a></li>
-				</ul>
-				<ul class="copyright">
-					<li>&copy; 2017</li><li>Background courtesy of NASA's image of the day</li>
-				</ul>
-			</footer>
+		<footer id="footer">
+			<ul class="icons">
+				<li><a href="https://www.github.com/apt-helion/search-engine"><span class="label">GitHub</span></a></li>
+			</ul>
+			<ul class="copyright">
+				<li>&copy; 2017</li><li>Background courtesy of NASA's image of the day</li>
+			</ul>
+		</footer>
 
 		<!-- Scripts -->
-			<script src="{{ url_for('static',filename='js/main.js') }}"></script>
+		<script src="{{ url_for('static',filename='js/main.js') }}"></script>
 	</body>
 </html>
