@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect
-from os.path import basename
 
 import feedparser
 import random
+import os
 from app import search
 from app import app
 
@@ -17,37 +17,26 @@ def home():
 
 @app.route('/results', methods=['GET', 'POST'])
 def page_results():
-    # Default Variables
-    seed = "https://github.com/apt-helion"
-    depth = 1
-    external = True
-    docFlag = False
-    docRanks = None
+    if request.method == 'POST':
+        if request.form.get('external'):
+            external = False
 
-    if request.form.get('external'):
-        external = False
+        seed, depth = request.form['seed'], request.form['depth']
+        query = request.form['query']
 
-    # seed, depth = request.form['seed'], request.form['depth']
-    query = request.form['query']
+        web = search.web(query, seed, depth, external)
+        pageInfo, pageRanks = web.search()
 
-    text = search.text(query, docs)
-    web = search.web(query, seed, depth, external)
-    pageInfo, pageRanks = web.search()
-    #docRanks = text.search()
+        backgrounds = ['http://i.imgur.com/HSEvn6M.jpg', 'http://i.imgur.com/wYekTr5.jpg',
+                       'http://i.imgur.com/AdlyZgO.jpg', 'http://i.imgur.com/I0zYjsT.jpg',
+                       'http://i.imgur.com/I0zYjsT.jpg', 'http://i.imgur.com/mj2QAev.jpg']
 
-    backgrounds = ['http://i.imgur.com/HSEvn6M.jpg', 'http://i.imgur.com/wYekTr5.jpg',
-                   'http://i.imgur.com/AdlyZgO.jpg', 'http://i.imgur.com/I0zYjsT.jpg',
-                   'http://i.imgur.com/I0zYjsT.jpg', 'http://i.imgur.com/mj2QAev.jpg']
+        number = random.randint(0,5)
+        background = backgrounds[number]
+        #Sets random background from list
 
-    number = random.randint(0,5)
-    background = backgrounds[number]
-    #Sets random background from list
-
-    return render_template('results.html',
-                            background = background,
-                            query = query,
-                            docRanks = docRanks,
-                            docFlag = docFlag,
-                            pageInfo = pageInfo,
-                            pageRanks = pageRanks)
- 
+        return render_template('results.html',
+                                background = background,
+                                query = query,
+                                pageInfo = pageInfo,
+                                pageRanks = pageRanks)

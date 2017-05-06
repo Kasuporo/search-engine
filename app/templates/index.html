@@ -19,36 +19,29 @@
 		<!-- Header -->
 		<header id="header">
 			<h1>viperidae</h1>
-			<p>A small scale text and web search engine. Built in Python. Named after a snake.</p>
+			<p>A small scale web search engine. Built in Python. Named after a snake.</p>
 		</header>
 
 		<!-- Form -->
 		<form id="search-form" method="POST" action="/results">
-			<input type="text" name="query" id="query" placeholder="Search" />
-			<input type="submit" value="Search" />
-		</form>
+            <div style="width: 20%; float:left">
+                <input type="text" name="query" id="query" placeholder="Search" />
+            </div>
 
-		<button id="settings"><span>Settings</span></button>
-		<div id="settingsBox" class="modal">
-			<div class="modal-content">
-				<div class="modal-header">
-					<span class="close">&times;</span>
-					<h2>Settings</h2>
-				</div>
-				
-				<div class="modal-body">
-					<div class =tab">
-						<button class="tablinks" onclick="openTab(event, 'Web')">Web Search</button>
-						<button class="tablinks" onclick="openTab(event, 'File')">File Search</button>
-					<div>
-					<div id="Web" class="tabcontent">
-					</div>
-					<div id="File" class="tabcontent">
-					</div>
-				</div>
+            <div style="width: 80%; float:left; position:relative; top:50px; left:-245px;">
+                <h3>Options</h3>
+                <div style="padding-bottom:5px">
+                    <label>Depth<label>
+                    <input type="number" name="depth" id="depth" min="1" max="5" />
+                    <input type="checkbox" name="external" id="depth" />
+                    <label>Include external links</label>
+                </div>
 
-			</div>
-		</div>
+                <input type="text" name="seed" id="seed" placeholder="Seed" />
+
+                <input type="submit" value="Search" id="searchbtn" />
+            </div>
+        </form>
 
 		<!-- Scripts -->
 		<script src="{{ url_for('static',filename='js/main.js') }}"></script>

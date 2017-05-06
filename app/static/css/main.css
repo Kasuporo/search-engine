@@ -94,22 +94,6 @@ body, input {
 
 	}
 
-
-a {
-	-moz-transition: border-bottom-color 0.2s ease, color 0.2s ease;
-	-webkit-transition: border-bottom-color 0.2s ease, color 0.2s ease;
-	-ms-transition: border-bottom-color 0.2s ease, color 0.2s ease;
-	transition: border-bottom-color 0.2s ease, color 0.2s ease;
-	border-bottom: dotted 1px rgba(255, 255, 255, 0.25);
-	color: #1cb495;
-}
-
-	a:hover {
-		border-bottom-color: transparent;
-		color: #1cb495 !important;
-		text-decoration: none;
-	}
-
 p {
 	margin: 0 0 2em 0;
 }
@@ -135,7 +119,8 @@ header p {
 
 /* Form */
 
-input[type="text"] {
+input[type="text"],
+input[type="number"] {
 	-moz-appearance: none;
 	-webkit-appearance: none;
 	-ms-appearance: none;
@@ -161,7 +146,8 @@ input[type="text"] {
 	width: 100%;
 }
 
-	input[type="text"]:focus {
+	input[type="text"]:focus,
+    input[type="number"]:focus {
 		-moz-animation: focus 0.1s;
 		-webkit-animation: focus 0.1s;
 		-ms-animation: focus 0.1s;
@@ -244,182 +230,22 @@ input[type="submit"] {
 		margin: 0 0 0 0;
 	}
 
-/* Settings Button */
-
-#settings {
-    border-radius: 4px;
-    background-color: #1cb495;
-    border: none;
-    color: #FFFFFF;
-    text-align: center;
-    font-size: 14px;
-    padding: 5px;
-    height: 2.25em;
-    width: 6.75em;
-    transition: all 0.5s;
-    cursor: pointer;
-    margin: 1px;
-    top: 15px;
-    font-weight: 600;
-    font-family: "Roboto", sans-serif;
-}
-
-#settings span {
-    cursor: pointer;
-    display: inline-block;
+#searchbtn{
     position: relative;
-    transition: 0.5s;
-}
-
-#settings span:after {
-    content: '\00bb';
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 0.5s;
-}
-
-#settings:hover span {
-    padding-right: 25px;
-}
-
-#settings:hover span:after {
-    opacity: 1;
-    right: 0;
-}
-
-/* The Modal (background) */
-
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 90%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    -webkit-animation-name: fadeIn; /* Fade in the background */
-    -webkit-animation-duration: 0.4s;
-    animation-name: fadeIn;
-    animation-duration: 0.4s
-}
-
-/* Modal Content */
-
-.modal-content {
-    position: fixed;
-    bottom: 0;
-    background-color: #fefefe;
-    width: 100%;
-    -webkit-animation-name: slideIn;
-    -webkit-animation-duration: 0.4s;
-    animation-name: slideIn;
-    animation-duration: 0.4s
-}
-
-/* The Close Button */
-
-.close {
-    color: white;
+    left: -175px;
+    top: 5px;
     float: right;
-    font-size: 28px;
-    font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal-header {
-    height: 3.15em;
-    padding: 1px 16px;
-    background-color: #1cb495;
-    color: white;
-}
-
-.modal-body {padding: 0px 16px;}
-
-/* Add Animation */
-
-@-webkit-keyframes slideIn {
-    from {bottom: -300px; opacity: 0}
-    to {bottom: 0; opacity: 1}
-}
-
-@keyframes slideIn {
-    from {bottom: -300px; opacity: 0}
-    to {bottom: 0; opacity: 1}
-}
-
-@-webkit-keyframes fadeIn {
-    from {opacity: 0}
-    to {opacity: 1}
-}
-
-@keyframes fadeIn {
-    from {opacity: 0}
-    to {opacity: 1}
-}
-
-/* Style the tab */
-
-div.tab {
-    overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-}
-
-div.tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-}
-
-div.tab button:hover {
-    background-color: #ddd;
-}
-
-div.tab button.active {
-    background-color: #ccc;
-}
-
-/* Style the tab content */
-
-.tablinks {
+#seed {
     position: relative;
-    vertical-align: top;
-    width: 7.15em;
-    height: 20px;
-    padding: 0;
-    font-size: 14px;
-    color:white;
-    text-align: center;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-    background: #1cb495;
-    border: 0;
+    width: 50em;
+    height: 2.26em;
 }
-    .tablinks:active {
-        background-color: #199e83;
-    }
-
-    .tablinks:hover {
-        background-color: #1fcaa7;
-    }
-
-.tabcontent {
-   display: none;
-   padding: 6px 12px;
-   border: 1px solid #ccc;
-   border-top: none;
+#depth {
+    width: 100px;
+    display: inline-block;
+    margin-right: 10px;
+    height: 1.75em;
 }
+#external {display:inline-block;}

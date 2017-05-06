@@ -75,11 +75,15 @@ class web:
 
     # Get ready for the slowest web crawler you have ever seen
     def web_crawl(self):
+        depth = 1
+        if self.depth.isnumeric():
+            depth = int(self.depth)
+            
         toCrawl = [self.seed]
         crawled = []
         nextDepth = []
         atDepth = 0
-        while toCrawl and atDepth <= self.depth:
+        while toCrawl and atDepth <= depth:
             page = toCrawl.pop()
             if page not in crawled:
                 nextDepth += self.find_all_links(page, crawled)
@@ -99,41 +103,6 @@ class web:
         ranks = self.page_rank(pageInfo, crawled)
         #print(sortedRanks)
         return pageInfo, ranks
-
-class text:
-
-    def __init__(self, query, docs):
-        self.query = query
-        self.docs = docs
-
-    # It's the same as the other one
-    def page_rank(self):
-        words = self.query.lower().split()
-        with open('app/stopwords.txt', 'r') as stopwords:
-            for w in words:
-                if w in stopwords:
-                    words.remove(w)
-
-        docRanks = {}
-        rank = 0
-        for doc in self.docs:
-            with open(doc, 'r') as d:
-                text = d.readlines().split()
-                for w in words:
-                    for t in text:
-                        if w == t:
-                            rank += 1
-            rankNum = len(words) / len(text)
-            rank /= rankNum * 100
-            docRanks[doc] = rank
-
-        sortedRanks = sorted(docRanks.items(), key=operator.itemgetter(1), reverse=True)
-        return sortedRanks
-
-    def search(self):
-        ranks = self.page_rank()
-        return ranks
-
 
 
 #####----- Tests -----#####
