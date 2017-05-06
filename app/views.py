@@ -18,8 +18,10 @@ def home():
 @app.route('/results', methods=['GET', 'POST'])
 def page_results():
     if request.method == 'POST':
+
+        external = False
         if request.form.get('external'):
-            external = False
+            external = True
 
         seed, depth = request.form['seed'], request.form['depth']
         query = request.form['query']
@@ -27,6 +29,7 @@ def page_results():
         web = search.web(query, seed, depth, external)
         pageInfo, pageRanks = web.search()
 
+        # Hotlinking images is bad, don't ever do this
         backgrounds = ['http://i.imgur.com/HSEvn6M.jpg', 'http://i.imgur.com/wYekTr5.jpg',
                        'http://i.imgur.com/AdlyZgO.jpg', 'http://i.imgur.com/I0zYjsT.jpg',
                        'http://i.imgur.com/I0zYjsT.jpg', 'http://i.imgur.com/mj2QAev.jpg']

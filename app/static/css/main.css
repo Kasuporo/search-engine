@@ -109,6 +109,13 @@ h1 {
 	line-height: 1.25em;
 }
 
+h3 {
+    color: white;
+    position: relative;
+    font-family: "Roboto";
+    font-weight: 200;
+}
+
 /* Section/Article */
 
 header p {
@@ -248,4 +255,6 @@ input[type="submit"] {
     margin-right: 10px;
     height: 1.75em;
 }
-#external {display:inline-block;}
+#external {
+    display: inline-block;
+}

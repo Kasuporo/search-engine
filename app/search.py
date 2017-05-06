@@ -15,11 +15,11 @@ class web:
         self.external = external
 
     def find_all_links(self, link, crawled):
-        http = httplib2.Http()
+        http = httplib2.Http(disable_ssl_certificate_validation=True)
         status, response = http.request(link)
         page = html.fromstring(response)
 
-	# Finds every link on a webpage
+	    # Finds every link on a webpage
         if page not in crawled: # Ignores duplicates
             if self.external:
                 url = [link for link in page.xpath('//a/@href') if link.startswith('http')]
@@ -31,11 +31,11 @@ class web:
         return url
 
     def get_info(self, link):
-        http = httplib2.Http()
+        http = httplib2.Http(disable_ssl_certificate_validation=True)
         status, response = http.request(link)
         soup = BeautifulSoup(response, 'lxml')
 
-	# Gets title and all text in a <p> tag
+        # Gets title and all text in a <p> tag
         try:
             title = soup.find('title').get_text()
             pTexts = [p.get_text() for p in soup.find_all('p')]
@@ -57,17 +57,20 @@ class web:
         for url in urls:
             rank = 0
             text = pageInfo[url][1].lower().split()
-            with open('app/stopwords.txt', 'r') as stopwords:
-                for word in text:
-                    if word in stopwords:
-                        text.remove(word)
-            for w in words:
-                for t in text:
-                    if w is t:
-                        rank += 1
-            rankNum = len(words) / len(text)
-            rank /= rankNum * 100
-            pageRanks[url] = rank
+            if len(text) > 0:
+                with open('app/stopwords.txt', 'r') as stopwords:
+                    for word in text:
+                        if word in stopwords:
+                            text.remove(word)
+                for w in words:
+                    for t in text:
+                        if w is t:
+                            rank += 1
+                rankNum = len(words) / len(text)
+                rank /= rankNum * 100
+                pageRanks[url] = rank
+            else:
+                pass
 
         # Sorts based on the values of pageRanks
         sortedRanks = sorted(pageRanks.items(), key=operator.itemgetter(1), reverse=True)
@@ -75,10 +78,10 @@ class web:
 
     # Get ready for the slowest web crawler you have ever seen
     def web_crawl(self):
-        depth = 1
+        depth = 1 # Defaults to 1 if not given a number
         if self.depth.isnumeric():
             depth = int(self.depth)
-            
+
         toCrawl = [self.seed]
         crawled = []
         nextDepth = []
@@ -101,7 +104,7 @@ class web:
         pageInfo, crawled = self.web_crawl()
         #print(pageInfo)
         ranks = self.page_rank(pageInfo, crawled)
-        #print(sortedRanks)
+        print(ranks)
         return pageInfo, ranks
 
 
