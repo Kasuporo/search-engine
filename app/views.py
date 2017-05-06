@@ -2,8 +2,8 @@ from flask import Flask, render_template, request, redirect
 
 import feedparser
 import random
-import os
 from app import search
+from app impoer spellcheck
 from app import app
 
 @app.route('/')
@@ -25,6 +25,14 @@ def page_results():
 
         seed, depth = request.form['seed'], request.form['depth']
         query = request.form['query']
+
+        # Checks spelling and FORCES YOU TO USE IT
+        queryCheck = query.split()
+        for i in queryCheck:
+            spell = search.spellcheck(i)
+            corrected = spell.correction()
+            queryCheck.replace(i, corrected)
+        query = " ".join(queryCheck)
 
         web = search.web(query, seed, depth, external)
         pageInfo, pageRanks = web.search()
