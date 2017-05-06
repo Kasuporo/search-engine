@@ -1,3 +1,5 @@
+// I don't know JS so these comments are necessary
+
 // Get the modal
 var modal = document.getElementById('settingsBox');
 
