@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect
 import feedparser
 import random
 from app import search
-from app impoer spellcheck
+from app import spellcheck
 from app import app
 
 @app.route('/')
@@ -28,14 +28,14 @@ def page_results():
 
         # Checks spelling and FORCES YOU TO USE IT
         queryCheck = query.split()
-        for i in queryCheck:
-            spell = search.spellcheck(i)
-            corrected = spell.correction()
-            queryCheck.replace(i, corrected)
+        for i in range(0, len(queryCheck)):
+            spell = spellcheck.check(queryCheck[i])
+            corrected = spell.correct(queryCheck[i])
+            queryCheck[i] = corrected
         query = " ".join(queryCheck)
 
-        web = search.web(query, seed, depth, external)
-        pageInfo, pageRanks = web.search()
+        #web = search.web(query, seed, depth, external)
+        #pageInfo, pageRanks = web.search()
 
         # Hotlinking images is bad, don't ever do this
         backgrounds = ['http://i.imgur.com/HSEvn6M.jpg', 'http://i.imgur.com/wYekTr5.jpg',
@@ -48,6 +48,6 @@ def page_results():
 
         return render_template('results.html',
                                 background = background,
-                                query = query,
-                                pageInfo = pageInfo,
-                                pageRanks = pageRanks)
+                                query = query)
+                                #pageInfo = pageInfo,
+                                #pageRanks = pageRanks)
