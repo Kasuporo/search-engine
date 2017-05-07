@@ -1,33 +1,34 @@
 <!DOCTYPE HTML>
 <html>
-	<!--- Background --->
-	<style type="text/css">
-		body { background-image: url('{{ background }}');
-				background-size: cover;
-				-webkit-background-size: cover;
-				-moz-background-size: cover;
-				-o-background-size: cover; }
-	</style>
+
 	<head>
 		<title>Results</title>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" href="{{ url_for('static',filename='css/results.css') }}" />
-		<!--- Header Search Box --->
-		<header id="header">
-			<h1>viperidae<h1>
-			<form id="search-form" method="post" action="/results">
-				<input type="text" name="query" placeholder="Search" style="color: white;" />
-				<input type="submit" value="Search" />
-			</form>
-		</header>
 	</head>
 	<body>
+
+		<!--- Header Search Box --->
+		<header id="header">
+			<a href="/"><h2>viperidae<h2></a>
+		</header>
+
 		<div id="search-text">
-			<p style="color: white;">Search results for <b><i>{{ query }}</i></b></p>
+			<p>Search results for <b><i>{{ query }}</i></b></p>
+
 			<!--- Results --->
 			<div id="results-body">
-
+                {% for page in pages %}
+                <a href="{{ page.url }}">
+                    <div id="results">
+                        <h3>{{ page.title }}</h3>
+                        <p>{{ page.body }}</p>
+                        <p>{{ page.url }}</p>
+                    </div>
+                </a>
+                {% endfor %}
 			</div>
+
 		</div>
 	</body>
 </html>

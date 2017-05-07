@@ -12,146 +12,62 @@
 
 #header {
 	position: absolute;
-	display: flex;
+	width: 95%;
 	height: 40px;
 	margin: 0;
+    border-bottom: 2px solid black;
+    border-bottom-width: 2px;
 }
 
-
-#header form {
-	position: relative;
-	top: -5px;
-	left: 20px;
-}
-
-#header h1 {
-	position: relative;
-	top: 5px;
-	left: 5px;
-}
-
-#header input[type="submit"],
-button,
-.button {
-	-moz-appearance: none;
-	-webkit-appearance: none;
-	-ms-appearance: none;
-	appearance: none;
-	-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out;
-	-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out;
-	-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out;
-	transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out;
-	background-color: #1cb495;
-	border-radius: 6px;
-	border: 0;
-	color: #ffffff !important;
-	cursor: pointer;
-	display: inline-block;
-	font-weight: 700;
-	height: 2.50em;
-	line-height: 1.50em;
-	padding: 0 1.125em;
-	text-align: center;
-	text-decoration: none;
-	white-space: nowrap;
-}
-
-	#header input[type="submit"]:hover,
-	button:hover,
-	.button:hover {
-		background-color: #1fcaa7;
-	}
-
-	#header input[type="submit"]:active,
-	button:active,
-	.button:active {
-		background-color: #199e83;
-	}
-}
-
-#header input[type="text"]
-select,
-textarea {
-	-moz-appearance: none;
-	-webkit-appearance: none;
-	-ms-appearance: none;
-	appearance: none;
-	-moz-transition: border-color 0.2s ease, background-color 0.2s ease;
-	-webkit-transition: border-color 0.2s ease, background-color 0.2s ease;
-	-ms-transition: border-color 0.2s ease, background-color 0.2s ease;
-	transition: border-color 0.2s ease, background-color 0.2s ease;
-	display: block;
-	outline: 0;
-	padding: 0 0em;
-	text-decoration: none;
-	width: 100%;
-}
-	#header input[type="text"]:focus,
-	select:focus,
-	textarea:focus {
-		background-color: rgba(255, 255, 255, 0.125);
-		border-color: #1cb495;
-	}
-
-/* Search Form */
-
-#search-form {
-	display: -moz-flex;
-	display: -webkit-flex;
-	display: -ms-flex;
-	display: flex;
-	position: relative;
-	margin-top: 10px;
-}
-
-	#search-form input[type="text"] {
-		border-radius: 2px;
-		border: none;
-		border: solid 2px rgba(255, 255, 255, 0.70);
-		width: 50em;
-		height: 30px;
-		background-color: transparent;
-	}
-
-	#search-form > * {
-		margin: 0 0 0 0.1em;
-	}
-
-	#search-form > :first-child {
-		margin: 0 0 0 0;
-	}
-
-	#search-form input[type="submit"] {
-		height: 30px;
-	}
+    #header h2 {
+    	position: relative;
+    	top: 5px;
+    	left: 15px;
+        font-family: "Source Code Pro", monospace;
+    }
 
 /* Type */
 
-h1, h2, h3, h4, h5, h6 {
-	color: #fff;
-	text-shadow: 2px 2px 4px #000000;
+h1, h2, h4, h5, h6 {
+	color: black;
 	font-weight: 700;
 	line-height: 1em;
 	margin: 0 0 1em 0;
 }
 
-h1 {
-	font-family: "Source Code Pro", monospace;
-	font-size: 1.5em;
-	line-height: 1em;
+p {font-weight: 100; color: #474747}
+
+a {
+    text-decoration: none;
+    color: #727272;
+    font-weight: 50;
 }
 
 /* Body */
 
 #search-text {
-	position: absolute;
+	position: relative;
+    width: 900px;
 	top: 50px;
 	left: 15px;
-	color: rgba(255, 255, 255, 0.75);
+	color: black;
 	font-family: "Roboto", sans-serif;
 }
 
 #results-body {
 	position: absolute;
+    color: black;
+    width: 85%;
+    height: 95%;
 	left: 15px;
 }
+
+    #results-body a:visited {
+        color: gray;
+    }
+
+#results h3 {color:#1659a5}
+
+    #results:hover {
+        background-color: #eaeaea;
+    }

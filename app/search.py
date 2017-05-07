@@ -37,10 +37,10 @@ class web:
 
         # Gets title and all text in a <p> tag
         try:
-            title = soup.find('title').get_text()
-            pTexts = [p.get_text() for p in soup.find_all('p')]
-            pTexts = " ".join(pTexts).replace('\n', '') # Removes all newlines (\n)
-            pageInfo = [title, pTexts]
+            title    = soup.find('title').get_text()
+            pTexts   = [p.get_text() for p in soup.find_all('p')]
+            pTexts   = " ".join(pTexts).replace('\n', '') # Removes all newlines (\n)
+            pageInfo = [title, pTexts[:140]+'...'] # Restrics text to 140 characters
             return pageInfo
         except:
             return None # Makes sure it is a page and not a picture
@@ -69,8 +69,6 @@ class web:
                 rankNum = len(words) / len(text)
                 rank /= rankNum * 100
                 pageRanks[url] = rank
-            else:
-                pass
 
         # Sorts based on the values of pageRanks
         sortedRanks = sorted(pageRanks.items(), key=operator.itemgetter(1), reverse=True)
@@ -78,14 +76,15 @@ class web:
 
     # Get ready for the slowest web crawler you have ever seen
     def web_crawl(self):
-        depth = 1 # Defaults to 1 if not given a number
+        toCrawl   = [self.seed]
+        crawled   = []
+        nextDepth = []
+        atDepth   = 0
+        depth     = 1 # Defaults to 1 if not given a number
+
         if self.depth.isnumeric():
             depth = int(self.depth)
 
-        toCrawl = [self.seed]
-        crawled = []
-        nextDepth = []
-        atDepth = 0
         while toCrawl and atDepth <= depth:
             page = toCrawl.pop()
             if page not in crawled:
@@ -102,10 +101,17 @@ class web:
 
     def search(self): # Runs all functions
         pageInfo, crawled = self.web_crawl()
-        #print(pageInfo)
         ranks = self.page_rank(pageInfo, crawled)
-        print(ranks)
-        return pageInfo, ranks
+
+        pages = []
+        for i in range(0,5):
+            temp          = {'url': 'url', 'title': 'title', 'body': 'body'}
+            temp['url']   = ranks[i][0]
+            temp['title'] = pageInfo[temp['url']][0]
+            temp['body']  = pageInfo[temp['url']][1]
+            pages.append(temp)
+        #print(pages)
+        return pages
 
 
 #####----- Tests -----#####

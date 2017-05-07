@@ -34,20 +34,9 @@ def page_results():
             queryCheck[i] = corrected
         query = " ".join(queryCheck)
 
-        #web = search.web(query, seed, depth, external)
-        #pageInfo, pageRanks = web.search()
-
-        # Hotlinking images is bad, don't ever do this
-        backgrounds = ['http://i.imgur.com/HSEvn6M.jpg', 'http://i.imgur.com/wYekTr5.jpg',
-                       'http://i.imgur.com/AdlyZgO.jpg', 'http://i.imgur.com/I0zYjsT.jpg',
-                       'http://i.imgur.com/I0zYjsT.jpg', 'http://i.imgur.com/mj2QAev.jpg']
-
-        number = random.randint(0,5)
-        background = backgrounds[number]
-        #Sets random background from list
+        web = search.web(query, seed, depth, external)
+        pages = web.search()
 
         return render_template('results.html',
-                                background = background,
-                                query = query)
-                                #pageInfo = pageInfo,
-                                #pageRanks = pageRanks)
+                                query = query,
+                                pages = pages)
