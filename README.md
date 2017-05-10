@@ -12,13 +12,16 @@ I AM NOT going to pay for a server to host this on so if you want to use it for 
 1. Install Python 3.x
 
 2. Download or clone the repo:
-`git clone https://github.com/apt-helion/Viperidae
+
+`git clone https://github.com/apt-helion/Viperidae`
 
 3. Create a virutal environment in the repo:
-`python3 -m venv <enter name>
+
+`python3 -m venv <enter name>`
 
 4. Install requirements:
-`<enter name>\bin\pip install requirements.txt
+
+`<enter name>\bin\pip install requirements.txt`
 
 5. Run the thing:
 `<enter name>\bin\python run.py
