@@ -24,7 +24,8 @@ I AM NOT going to pay for a server to host this on so if you want to use it for 
 `<enter name>\bin\pip install requirements.txt`
 
 5. Run the thing:
-`<enter name>\bin\python run.py
+
+`<enter name>\bin\python run.py`
 
 ### For OSX
 
