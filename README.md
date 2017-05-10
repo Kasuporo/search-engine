@@ -1,7 +1,7 @@
 # Viperidae
 
 Viperidae [vī′per·ə‚dē] is a small scale text and web search engine, designed for accurately searching serveral
-text files and web pages. Created for my Year 12 Major Project with HTML/CSS and Python.
+web pages (it doesn't, but it's the thought that counts). Created for my Year 12 Major Project with HTML/CSS and Python.
 
 ## Localhost user guide
 
