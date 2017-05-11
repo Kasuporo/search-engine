@@ -25,7 +25,7 @@ I AM NOT going to pay for a server to host this on so if you want to use it for 
 
 5. Run the thing:
 
-`<enter name>\bin\python run.py`
+`<enter name>\Scripts\python run.py`
 
 ### For OSX
 
