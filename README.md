@@ -21,11 +21,11 @@ I AM NOT going to pay for a server to host this on so if you want to use it for 
 
 4. Install requirements:
 
-`<enter name>\bin\pip install requirements.txt`
+`<enter name>\Scripts\pip install -r requirements.txt`
 
 5. Run the thing:
 
-`<enter name>\bin\python run.py`
+`<enter name>\Scripts\python run.py`
 
 ### For OSX
 
