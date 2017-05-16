@@ -19,11 +19,11 @@ class web:
         status, response = http.request(link)
         page = html.fromstring(response)
 
-	    # Finds every link on a webpage
-        if page not in crawled: # Ignores duplicates
+        # Finds every link on a webpage
+        if page not in crawled:
             if self.external:
-                url = [link for link in page.xpath('//a/@href') if link.startswith('http')]
                 # Ignores relative links becuause they are bad
+                url = [link for link in page.xpath('//a/@href') if link.startswith('http')]
             else:
                 parsedUri = urlparse(link)
                 domain = '{uri.scheme}://{uri.netloc}/'.format(uri=parsedUri)

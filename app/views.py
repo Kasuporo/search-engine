@@ -28,7 +28,7 @@ def page_results():
 
         # Checks spelling and FORCES YOU TO USE IT
         queryCheck = query.split()
-        for i in range(0, len(queryCheck)):
+        for i in queryCheck:
             spell = spellcheck.check(queryCheck[i])
             corrected = spell.correct(queryCheck[i])
             queryCheck[i] = corrected
