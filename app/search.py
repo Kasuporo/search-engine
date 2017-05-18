@@ -57,18 +57,18 @@ class web:
         for url in urls:
             rank = 0
             text = pageInfo[url][1].lower().split()
-            if len(text) > 0:
-                with open('app/stopwords.txt', 'r') as stopwords:
-                    for word in text:
-                        if word in stopwords:
-                            text.remove(word)
+            #if len(text) > 0:
+            with open('app/stopwords.txt', 'r') as stopwords:
+                for word in text:
+                    if word in stopwords:
+                        text.remove(word)
                 for w in words:
                     for t in text:
-                        if w is t:
-                            rank += 1
-                rankNum = len(words) / len(text)
-                rank /= rankNum * 100
-                pageRanks[url] = rank
+                            if w is t:
+                                rank += 1
+            rankNum = len(words) / len(text)
+            rank /= rankNum * 100
+            pageRanks[url] = rank
 
         # Sorts based on the values of pageRanks
         sortedRanks = sorted(pageRanks.items(), key=operator.itemgetter(1), reverse=True)
