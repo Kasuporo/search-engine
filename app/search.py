@@ -47,7 +47,7 @@ class web:
 
     # Get ready for the worst page ranker you have ever seen
     def page_rank(self, pageInfo, urls):
-        words = self.query.lower().split()
+       words = self.query.lower().split()
         with open('app/stopwords.txt') as stopwords: # Remove unnecessary words from search
             for word in words:
                 if word in stopwords:
