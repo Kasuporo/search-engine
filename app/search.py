@@ -1,6 +1,7 @@
 import httplib2
 import lxml.html
 import operator
+import re
 
 from urllib.parse import urlparse
 from lxml import html
@@ -8,11 +9,12 @@ from bs4 import BeautifulSoup
 
 class web:
 
-    def __init__(self, query, seed, depth, external):
+    def __init__(self, query, seed, depth, external, pharseSearch):
         self.query = query
         self.seed = seed
         self.depth = depth
         self.external = external
+        self.pharseSearch = pharseSearch
 
     def find_all_links(self, link, crawled):
         http = httplib2.Http(disable_ssl_certificate_validation=True)
@@ -28,6 +30,7 @@ class web:
                 parsedUri = urlparse(link)
                 domain = '{uri.scheme}://{uri.netloc}/'.format(uri=parsedUri)
                 url = [link for link in page.xpath('//a/@href') if link.startswith(domain)]
+        print("Found: ", url)
         return url
 
     def get_info(self, link):
@@ -43,12 +46,12 @@ class web:
             pageInfo = [title, pTexts[:140]+'...'] # Restrics text to 140 characters
             return pageInfo
         except:
-            return None # Makes sure it is a page and not a picture
+            return 1 # Makes sure it is a page and not a picture
 
     # Get ready for the worst page ranker you have ever seen
     def page_rank(self, pageInfo, urls):
-       words = self.query.lower().split()
-        with open('app/stopwords.txt') as stopwords: # Remove unnecessary words from search
+        words = self.query.lower().split()
+        with open('app/stopwords.txt', 'r') as stopwords: # Remove unnecessary words from search
             for word in words:
                 if word in stopwords:
                     words.remove(word)
@@ -74,6 +77,20 @@ class web:
         sortedRanks = sorted(pageRanks.items(), key=operator.itemgetter(1), reverse=True)
         return sortedRanks # Returns as: [(url, rank), ...] in descending order
 
+    def phrase_rank(self, pageInfo, urls):
+        pageRanks = {}
+        phrase = self.query.lower()
+
+        for url in urls:
+            rank = 0
+            text = pageInfo[url][1].lower()
+            re = re.findall(phrase, text) # Regex is fun, regex is good
+            rank += len(re)
+            pageRanks[url] = rank
+
+        sortedRanks = sorted(pageRanks.items(), key=operator.itemgetter(1), reverse=True)
+        return sortedRanks
+
     # Get ready for the slowest web crawler you have ever seen
     def web_crawl(self):
         toCrawl   = [self.seed]
@@ -96,15 +113,20 @@ class web:
 
         pageInfo = {}
         for page in crawled:
-            pageInfo[page] = self.get_info(page)
+            if self.get_info(page) != 1:
+                pageInfo[page] = self.get_info(page)
         return pageInfo, crawled # Returns as {url: [title, pTexts], ...}, [crawled, ...]
 
-    def search(self): # Runs all functions
+    def search(self):
         pageInfo, crawled = self.web_crawl()
-        ranks = self.page_rank(pageInfo, crawled)
+
+        if self.phraseSearch:
+            ranks = self.phrase_rank(pageInfo, crawled)
+        else:
+            ranks = self.page_rank(pageInfo, crawled)
 
         pages = []
-        for i in range(0,5):
+        for i in range(0,10):
             temp          = {'url': 'url', 'title': 'title', 'body': 'body'}
             temp['url']   = ranks[i][0]
             temp['title'] = pageInfo[temp['url']][0]
@@ -120,7 +142,8 @@ if __name__ == " __main__":
     query = "Github"
     depth = 1
     external = False
+    pharseSearch = False
 
-    webSearch = web(query, seed, depth, external)
+    webSearch = web(query, seed, depth, external, pharseSearch)
     #print(webSearch.web_crawl())
     #print(webSearch.search())

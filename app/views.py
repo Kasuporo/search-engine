@@ -1,3 +1,4 @@
+import re
 from flask import Flask, render_template, request, redirect
 
 from app import search
@@ -13,12 +14,22 @@ def home():
 def page_results():
     if request.method == 'POST':
 
-        external = False
-        if request.form.get('external'):
-            external = True
+        # Defaults
+        pharseSearch = False
 
+        external = True if request.form.get('external') else False
         seed, depth = request.form['seed'], request.form['depth']
         query = request.form['query']
+
+        # Test for phrase searching
+        pattern = r'\"(.+?)\"' # Regex for finding text in quotes
+        m = re.search(pattern, query)
+        try:
+            query = m.group()
+            query = query[1:-1] # Remove quotes
+            pharseSearch = True
+        except:
+            pass
 
         # Checks spelling
         queryCheck = query.split()
@@ -28,7 +39,8 @@ def page_results():
             queryCheck[i] = corrected
         queryCheck = " ".join(queryCheck)
 
-        web = search.web(query, seed, depth, external)
+        # Do the search
+        web = search.web(query, seed, depth, external, pharseSearch)
         pages = web.search()
 
         if query == queryCheck: # If there is not a spelling mistake
