@@ -1,13 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Code+Pro|Roboto:400,700");
 
-/* Box Model */
-
-*, *:before, *:after {
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-}
-
 /* Header */
 
 #header {
@@ -15,39 +7,44 @@
 	width: 95%;
 	height: 40px;
 	margin: 0;
-    border-bottom: 2px solid black;
-    border-bottom-width: 2px;
+  border-bottom: 2px solid #dc9656;
+  border-bottom-width: 2px;
 }
 
-    #header h2 {
-    	position: relative;
-    	top: 5px;
-    	left: 15px;
-        font-family: "Source Code Pro", monospace;
-    }
+	#header h2 {
+  	position: relative;
+    top: 5px;
+    left: 15px;
+    font-family: "Source Code Pro", monospace;
+  }
 
 /* Type */
 
 h1, h2, h4, h5, h6 {
-	color: black;
+	color: #dc9656;
 	font-weight: 700;
 	line-height: 1em;
 	margin: 0 0 1em 0;
 }
 
-p {font-weight: 100; color: #474747}
+i { color: #dc9656; }
+p { font-weight: 100; color: #e8e8e8; }
 
 a {
-    text-decoration: none;
-    color: #727272;
-    font-weight: 50;
+  text-decoration: none;
+  color: #383838;
+  font-weight: 50;
 }
 
 /* Body */
 
+body {
+	background-color: #282828;
+}
+
 #search-text {
 	position: relative;
-    width: 900px;
+  width: 900px;
 	top: 50px;
 	left: 15px;
 	color: black;
@@ -56,18 +53,18 @@ a {
 
 #results-body {
 	position: absolute;
-    color: black;
-    width: 85%;
-    height: 95%;
+  color: black;
+  width: 85%;
+  height: 95%;
 	left: 15px;
 }
 
-    #results-body a:visited {
-        color: gray;
-    }
+	#results-body a:visited {
+  	color: #ba8baf;
+  }
 
-#results h3 {color:#1659a5}
+#results h3 { color:#7cafc2 }
 
-    #results:hover {
-        background-color: #eaeaea;
-    }
+  #results:hover {
+    background-color: #585858;
+  }

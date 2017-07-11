@@ -9,12 +9,12 @@ from bs4 import BeautifulSoup
 
 class web:
 
-    def __init__(self, query, seed, depth, external, pharseSearch):
+    def __init__(self, query, seed, depth, external, phrase):
         self.query = query
         self.seed = seed
         self.depth = depth
         self.external = external
-        self.pharseSearch = pharseSearch
+        self.phrase = phrase
 
     def find_all_links(self, link, crawled):
         http = httplib2.Http(disable_ssl_certificate_validation=True)
@@ -30,7 +30,7 @@ class web:
                 parsedUri = urlparse(link)
                 domain = '{uri.scheme}://{uri.netloc}/'.format(uri=parsedUri)
                 url = [link for link in page.xpath('//a/@href') if link.startswith(domain)]
-        print("Found: ", url)
+        print("Found from", link, ":", url)
         return url
 
     def get_info(self, link):
@@ -84,11 +84,12 @@ class web:
         for url in urls:
             rank = 0
             text = pageInfo[url][1].lower()
-            re = re.findall(phrase, text) # Regex is fun, regex is good
-            rank += len(re)
+            reall = re.findall(phrase, text) # Regex is fun, regex is good
+            rank += len(reall)
             pageRanks[url] = rank
 
         sortedRanks = sorted(pageRanks.items(), key=operator.itemgetter(1), reverse=True)
+        print(sortedRanks)
         return sortedRanks
 
     # Get ready for the slowest web crawler you have ever seen
@@ -96,8 +97,7 @@ class web:
         toCrawl   = [self.seed]
         crawled   = []
         nextDepth = []
-        atDepth   = 0
-        depth     = 1 # Defaults to 1 if not given a number
+        atDepth   = 1
 
         if self.depth.isnumeric():
             depth = int(self.depth)
@@ -117,16 +117,17 @@ class web:
                 pageInfo[page] = self.get_info(page)
         return pageInfo, crawled # Returns as {url: [title, pTexts], ...}, [crawled, ...]
 
-    def search(self):
+    def run(self):
         pageInfo, crawled = self.web_crawl()
 
-        if self.phraseSearch:
+        if self.phrase:
             ranks = self.phrase_rank(pageInfo, crawled)
         else:
             ranks = self.page_rank(pageInfo, crawled)
 
         pages = []
-        for i in range(0,10):
+        num = 10 if len(ranks) >= 10 else len(ranks) # Limits to 10
+        for i in range(0, num):
             temp          = {'url': 'url', 'title': 'title', 'body': 'body'}
             temp['url']   = ranks[i][0]
             temp['title'] = pageInfo[temp['url']][0]
@@ -135,15 +136,3 @@ class web:
         #print(pages)
         return pages
 
-
-#####----- Tests -----#####
-if __name__ == " __main__":
-    seed = "https://github.com/apt-helion/Viperidae"
-    query = "Github"
-    depth = 1
-    external = False
-    pharseSearch = False
-
-    webSearch = web(query, seed, depth, external, pharseSearch)
-    #print(webSearch.web_crawl())
-    #print(webSearch.search())

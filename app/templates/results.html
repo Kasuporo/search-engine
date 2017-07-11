@@ -8,14 +8,14 @@
 	</head>
 	<body>
 
-		<!--- Header Search Box --->
+		<!--- Header --->
 		<header id="header">
 			<a href="/"><h2>viperidae<h2></a>
 		</header>
 
 		<div id="search-text">
 			{% if queryCheck %}
-			<p>Did you mean: <a href="/results"><b><i>{{ queryCheck }}?</i></b></a></p>
+			<p>Did you mean: <a href="/"><i>{{ queryCheck }}?</i></a></p>
 			{% endif %}
 			<p>Search results for <b><i>{{ query }}</i></b></p>
 

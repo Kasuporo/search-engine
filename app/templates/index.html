@@ -1,34 +1,26 @@
 <!DOCTYPE HTML>
 <html>
-	<!--- Background --->
-	<style type=text/css>
-		body { background-image: url({{ background }});
-			   background-position: center;
-			   background-size: cover;
-			   -webkit-background-size: cover;
-			   -moz-background-size: cover;
-			   -o-background-size: cover; }
-	</style>
+
 	<head>
 		<title>Viperidae Search Engine</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}" />
 	</head>
+
 	<body>
 		<!-- Header -->
 		<header id="header">
 			<h1>viperidae</h1>
-			<p>A small scale web search engine. Built in Python. Named after a snake.</p>
 		</header>
 
 		<!-- Form -->
 		<form id="search-form" method="POST" action="/results">
-		  <div style="width: 20%; float:left">
+		  <div style="width: 20%; float:center">
         <input type="text" name="query" id="query" placeholder="Search" />
 		  </div>
 
-      <div style="width: 80%; float:left; position:relative; top:50px; left:-245px;">
+      <div style="width: 80%; float:center; position:relative; top:52px; left:-265px;">
         <label>Depth<label>
         <input type="number" name="depth" id="depth" min="1" max="5" />
         <input type="checkbox" name="external" id="external" />
@@ -36,10 +28,7 @@
 				<input type="text" name="seed" id="seed" placeholder="Seed" />
 				<input type="submit" value="Search" onclick="validate();" id="searchbtn" />
 		  </div>
-
-		</div>
     </form>
-
 	</body>
 	<!-- Scripts -->
 	<script src="{{ url_for('static',filename='js/main.js') }}"></script>
