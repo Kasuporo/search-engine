@@ -16,18 +16,18 @@
 
 		<!-- Form -->
 		<form id="search-form" method="POST" action="/results">
-		  <div style="width: 20%; float:center">
-        <input type="text" name="query" id="query" placeholder="Search" />
-		  </div>
+		<div style="width: 20%; float:center">
+          <input type="text" name="query" id="query" placeholder="Search" />
+		</div>
 
-      <div style="width: 80%; float:center; position:relative; top:52px; left:-265px;">
-        <label>Depth<label>
-        <input type="number" name="depth" id="depth" min="1" max="5" />
-        <input type="checkbox" name="external" id="external" />
-        <label>Include external links</label>
-				<input type="text" name="seed" id="seed" placeholder="Seed" />
-				<input type="submit" value="Search" onclick="validate();" id="searchbtn" />
-		  </div>
+	    <div id="options">
+	      <label>Depth<label>
+	      <input type="number" name="depth" id="depth" min="1" max="5" />
+	      <input type="checkbox" name="external" id="external" />
+	      <label>Include external links</label>
+		  <input type="text" name="seed" id="seed" placeholder="Seed" />
+		  <input type="submit" value="Search" onclick="validate();" id="searchbtn" />
+		</div>
     </form>
 	</body>
 	<!-- Scripts -->

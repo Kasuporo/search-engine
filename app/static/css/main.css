@@ -109,14 +109,14 @@ input[type="number"] {
 	width: 100%;
 }
 
-	input[type="text"]:focus,
+  input[type="text"]:focus,
   input[type="number"]:focus {
 		-moz-animation: focus 0.1s;
 		-webkit-animation: focus 0.1s;
 		-ms-animation: focus 0.1s;
 		animation: focus 0.1s;
 		background-color: rgba(255, 255, 255, 0.125);
-		border-color: #1cb495;
+		border-color: #dc9656;
 	}
 
 input[type="text"] {
@@ -168,6 +168,12 @@ input[type="submit"] {
 
 
 /* Search Form */
+#options {
+	width: 50%;
+	position: absolute;
+	float: left;
+	top: 52px;
+}
 
 #search-form {
 	display: -moz-flex;
@@ -181,25 +187,17 @@ input[type="submit"] {
 		width: 50em;
 	}
 
-	#search-form > * {
-		margin: 0 0 0 0.1em;
-	}
-
-	#search-form > :first-child {
-		margin: 0 0 0 0;
-	}
-
 #searchbtn{
     position: relative;
-    left: -175px;
-    top: 5px;
     float: right;
+	top: 8px;
 }
 
 #seed {
     position: relative;
     width: 50em;
     height: 2.26em;
+	top: 4px;
 }
 #depth {
     width: 100px;
