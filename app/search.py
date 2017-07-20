@@ -16,27 +16,51 @@ class web:
         self.external = external
         self.phrase = phrase
 
+    def check_url(self, link, domain):
+        """ Checks a link to see if it is suitable
+            for futher crawling, and adds the domain
+            name to a relative link if not external """
+
+        ignore = ['.jpg', '.png', '.gif', '.pdf']
+        for ext in ignore:
+            if ext in link:
+                return False
+
+        if not link.startswith(domain):
+            link = domain + link[1:]
+            return link
+
+        return link
+
     def find_all_links(self, link, crawled):
         http = httplib2.Http(disable_ssl_certificate_validation=True)
         status, response = http.request(link)
         page = html.fromstring(response)
 
+        parsedUri = urlparse(link)
+        domain = '{uri.scheme}://{uri.netloc}/'.format(uri=parsedUri)
         # Finds every link on a webpage
+        urls = []
         if page not in crawled:
-            if self.external:
-                # Ignores relative links becuause they are bad
-                url = [link for link in page.xpath('//a/@href') if link.startswith('http')]
-            else:
-                parsedUri = urlparse(link)
-                domain = '{uri.scheme}://{uri.netloc}/'.format(uri=parsedUri)
-                url = [link for link in page.xpath('//a/@href') if link.startswith(domain)]
-        print("Found from", link, ":", url)
-        return url
+            for link in page.xpath('//a/@href'):
+                if self.external:
+                    urls.append(self.check_url(link, domain))
+                else:
+                    if link.startswith(domain):
+                        urls.append(self.check_url(link, domain))
+            
+        for link in urls[:]:
+            if link is False:
+                urls.remove(link)
+
+        print('Found links from: %s \n %s \n' % (link,urls))
+        return urls
 
     def get_info(self, link):
         http = httplib2.Http(disable_ssl_certificate_validation=True)
         status, response = http.request(link)
         soup = BeautifulSoup(response, 'lxml')
+        print('Getting text from: %s' % (link))
 
         # Gets title and all text in a <p> tag
         try:
@@ -46,7 +70,7 @@ class web:
             pageInfo = [title, pTexts[:140]+'...'] # Restrics text to 140 characters
             return pageInfo
         except:
-            return 1 # Makes sure it is a page and not a picture
+            return 1 # Last resort to filter a 'not webpage'
 
     # Get ready for the worst page ranker you have ever seen
     def page_rank(self, pageInfo, urls):
@@ -72,6 +96,7 @@ class web:
             rankNum = len(words) / len(text)
             rank /= rankNum * 100
             pageRanks[url] = rank
+            print('Ranked %s as %f' % (url,rank))
 
         # Sorts based on the values of pageRanks
         sortedRanks = sorted(pageRanks.items(), key=operator.itemgetter(1), reverse=True)
@@ -87,6 +112,7 @@ class web:
             reall = re.findall(phrase, text) # Regex is fun, regex is good
             rank += len(reall)
             pageRanks[url] = rank
+            print('Ranked %s as %f' % (url,rank))
 
         sortedRanks = sorted(pageRanks.items(), key=operator.itemgetter(1), reverse=True)
         print(sortedRanks)
@@ -119,6 +145,7 @@ class web:
 
     def run(self):
         pageInfo, crawled = self.web_crawl()
+        print('\n Starting page ranking \n')
 
         if self.phrase:
             ranks = self.phrase_rank(pageInfo, crawled)
