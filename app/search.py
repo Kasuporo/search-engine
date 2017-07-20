@@ -48,7 +48,7 @@ class web:
                 else:
                     if link.startswith(domain):
                         urls.append(self.check_url(link, domain))
-            
+
         for link in urls[:]:
             if link is False:
                 urls.remove(link)
@@ -66,8 +66,8 @@ class web:
         try:
             title    = soup.find('title').get_text()
             pTexts   = [p.get_text() for p in soup.find_all('p')]
-            pTexts   = " ".join(pTexts).replace('\n', '') # Removes all newlines (\n)
-            pageInfo = [title, pTexts[:140]+'...'] # Restrics text to 140 characters
+            pTexts   = " ".join(pTexts).replace('\n', ' ') # Removes all newlines (\n)
+            pageInfo = [title, pTexts]
             return pageInfo
         except:
             return 1 # Last resort to filter a 'not webpage'
@@ -158,8 +158,7 @@ class web:
             temp          = {'url': 'url', 'title': 'title', 'body': 'body'}
             temp['url']   = ranks[i][0]
             temp['title'] = pageInfo[temp['url']][0]
-            temp['body']  = pageInfo[temp['url']][1]
+            temp['body']  = pageInfo[temp['url']][1][:140]+'...'
             pages.append(temp)
         #print(pages)
         return pages
-
