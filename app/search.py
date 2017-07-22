@@ -18,9 +18,9 @@ class web:
         self.phrase = phrase
 
     def check_url(self, link, domain):
-        """ 
-        Checks a link to see if it is suitable for futher crawling, 
-        and adds the domain name to a relative link if not external 
+        """
+        Checks a link to see if it is suitable for futher crawling,
+        and adds the domain name to a relative link if not external
         """
 
         ignore = ['.jpg', '.png', '.gif', '.pdf']
@@ -103,7 +103,7 @@ class web:
     # Get ready for the worst page ranker you have ever seen
     def page_rank(self, pageInfo, urls):
         words = self.query.lower().split()
-        with open('app/stopwords.txt', 'r') as stopwords: # Remove unnecessary words from search
+        with open('app/stopwords.txt', 'r') as stopwords:
             for word in words:
                 if word in stopwords:
                     words.remove(word)
@@ -179,7 +179,7 @@ class web:
         for i in range(0, num):
             temp          = {'url': 'url', 'title': 'title', 'body': 'body'}
             link          = ranks[i][0]
-            temp['url']   = ranks[i][0]
+            temp['url']   = link
             temp['title'] = pageInfo[link][0]
             char          = pageInfo[link][2] # Limits charcters to 240
             temp['body']  = char[:240]+'...' if len(char) > 240 else char
