@@ -111,13 +111,16 @@ class web:
         pageRanks = {}
         for url in urls:
             rank = 0
-            text = pageInfo[url][1].lower().split()
-            #if len(text) > 0:
-            for w in words:
-                for t in text:
-                    rank += 1 if w == t else 0
-            rankRel = len(words) / len(text)
-            rank /= rankRel * 100
+            try:
+                text = pageInfo[url][1].lower().split()
+                #if len(text) > 0:
+                for w in words:
+                    for t in text:
+                        rank += 1 if w == t else 0
+                rankRel = len(words) / len(text)
+                rank /= rankRel * 100
+            except:
+                pass
             pageRanks[url] = rank
             print('Ranked %s as %f' % (url,rank))
 
