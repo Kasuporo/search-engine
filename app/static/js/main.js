@@ -1,18 +1,19 @@
-function validate() {
-	var seed;
+$(document).ready(function() {
+	$(':input[type="submit"]').prop("disabled", true);
+	$('#error').hide();
 
-	// Error messages
-	var errors = ["Seed requires valid HTTP link"];
+	$('#seed').keyup(function() {
+		var seed = $(this).val();
 
-	// Regex for a HTTP link
-	var re = /^((http|https):\/\/www.)/;
+		var re = /((http|https):\/\/www.)/;
 
-	seed = document.getElementById("seed").value;
+		if (!re.test(seed)) {
+	   		$('#error').slideDown();
+		}
 
-	if (re.test(seed) == false) {
-		alert(errors[0]);
-	}
-}
-
-
-
+		if (re.test(seed)) {
+			$('#error').slideUp();
+	   		$('input[type="submit"]').prop("disabled", false);
+		}
+	});
+});
