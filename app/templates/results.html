@@ -14,15 +14,16 @@
 		</header>
 
 		<div id="search-text">
+      
 			{% if queryCheck %}
-			<p>Did you mean: <a href="/"><i>{{ queryCheck }}?</i></a></p>
+			  <p>Did you mean: <a href="/"><i>{{ queryCheck }}?</i></a></p>
 			{% endif %}
 			<p>Search results for <b><i>{{ query }}</i></b></p>
 
 			<!--- Results --->
 			<div id="results-body">
 				{% for page in pages %}
-        <a href="{{ page.url }}">
+          <a href="{{ page.url }}">
 						<div id="results">
 								<h3>{{ page.title }}</h3>
                 <p>{{ page.body }}</p>
