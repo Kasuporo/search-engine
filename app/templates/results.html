@@ -1,38 +1,38 @@
 <!DOCTYPE HTML>
 <html>
 
-	<head>
-		<title>Results</title>
-		<meta charset="utf-8" />
-		<link rel="stylesheet" href="{{ url_for('static',filename='css/results.css') }}" />
-	</head>
-	<body>
+  <head>
+    <title>Results</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/results.css') }}" />
+  </head>
+  <body>
 
-		<!--- Header --->
-		<header id="header">
-			<a href="/"><h2>viperidae<h2></a>
-		</header>
+    <!--- Header --->
+    <header id="header">
+      <a href="/"><h2>viperidae<h2></a>
+    </header>
 
-		<div id="search-text">
-      
-			{% if queryCheck %}
-			  <p>Did you mean: <a href="/"><i>{{ queryCheck }}?</i></a></p>
-			{% endif %}
-			<p>Search results for <b><i>{{ query }}</i></b></p>
+    <div id="search-text">
 
-			<!--- Results --->
-			<div id="results-body">
-				{% for page in pages %}
+      {% if queryCheck %}
+        <p>Did you mean: <a href="/"><i>{{ queryCheck }}?</i></a></p>
+      {% endif %}
+      <p>Search results for <b><i>{{ query }}</i></b></p>
+
+      <!--- Results --->
+      <div id="results-body">
+        {% for page in pages %}
           <a href="{{ page.url }}">
-						<div id="results">
-								<h3>{{ page.title }}</h3>
-                <p>{{ page.body }}</p>
-                <p>{{ page.url }}</p>
-            </div>
-            </a>
+           <div id="results">
+            <h3>{{ page.title }}</h3>
+            <p>{{ page.body }}</p>
+            <p>{{ page.url }}</p>
+           </div>
+          </a>
         {% endfor %}
-			</div>
+      </div>
 
-		</div>
-	</body>
+    </div>
+  </body>
 </html>
